@@ -50,6 +50,17 @@ public class Serviciu {
 
     }
 
+    public void adaugaPacient(Pacient p){
+        c.pacienti.add(p);
+    }
+
+    public void adaugaAngajat(Angajat a){
+        c.angajati.add(a);
+    }
+    public void adaugaProg(Programare p){
+        c.programari.add(p);
+    }
+
     public void adaugaClient(){
         System.out.println("Indroduceti un username: ");
         Scanner scanner = new Scanner(System.in);
@@ -102,11 +113,11 @@ public class Serviciu {
     public void loginAngajat(){
         int ok = 0;
         while(ok == 0){
-            System.out.println("\n\t Introdu username-ul: ");
+            System.out.println("\t Introdu username-ul: ");
             Scanner scanner = new Scanner(System.in);
             String username = scanner.nextLine();
 
-            System.out.println("\n\t Introdu parola: ");
+            System.out.println("\t Introdu parola: ");
             String parola = scanner.nextLine();
 
             Iterator itr = c.angajati.iterator();
@@ -162,11 +173,11 @@ public class Serviciu {
         int ok = 0;
         while(ok == 0){
 
-            System.out.println("\n\t Introdu username-ul: ");
+            System.out.println("\t Introdu username-ul: ");
             Scanner scanner = new Scanner(System.in);
             String username = scanner.nextLine();
 
-            System.out.println("\n\t Introdu parola: ");
+            System.out.println("\t Introdu parola: ");
             String parola = scanner.nextLine();
 
             if(username == "admin" && parola == "admin1234"){
@@ -184,78 +195,92 @@ public class Serviciu {
     }
 
     public void afisareMeniuAngajat(){
-        System.out.println("\t\t MENIU:\n");
-        System.out.println("\n\t Alegeti dintre urmatoarele optiuni:");
-        System.out.println("\n\t 1. Afisare angajati.");
-        System.out.println("\n\t 2. Afisare pacienti.");
-        System.out.println("\n\t 3. Afisare programari.");
-        System.out.println("\n\t 4. Afiseaza documente.");
-        System.out.println("\n\t 5. Obtine valabilitate trimitere medicala.");
-        System.out.println("\n\t 6. Sterge programare.");
-        System.out.println("\n\t 7. Elibereaza document.");
-        System.out.println("\n\t 8. Sterge document.");
+        int opt = 0;
+        while(opt != 9) {
+            System.out.println("\n\t-------------------------------------------\n");
+            System.out.println("\t\t MENIU:\n");
+            System.out.println("\t Alegeti dintre urmatoarele optiuni:");
+            System.out.println("\t 1. Afisare angajati.");
+            System.out.println("\t 2. Afisare pacienti.");
+            System.out.println("\t 3. Afisare programari.");
+            System.out.println("\t 4. Afiseaza documente.");
+            System.out.println("\t 5. Obtine valabilitate trimitere medicala.");
+            System.out.println("\t 6. Sterge programare.");
+            System.out.println("\t 7. Elibereaza document.");
+            System.out.println("\t 8. Sterge document.");
+            System.out.println("\t 9. Exit.\n");
 
-        Scanner scanner = new Scanner(System.in);
-        int opt = scanner.nextInt();
+            Scanner scanner = new Scanner(System.in);
+            opt = scanner.nextInt();
 
-        if(opt == 1) afisareAngajati();
-        if(opt == 2) afisarePacienti();
-        if(opt == 3) afisareProgramari();
-        if(opt == 4) afisareDocumente("permis");
-        if(opt == 5) calculValabilitate("permis");
-        if(opt == 6) stergeProgramare();
-        //if(opt == 7) elibereazaDocument();
-        if(opt == 8) stergeDocument();
+            if (opt == 1) afisareAngajati();
+            if (opt == 2) afisarePacienti();
+            if (opt == 3) afisareProgramari();
+            if (opt == 4) afisareDocumente("permis");
+            if (opt == 5) calculValabilitate("permis");
+            if (opt == 6) stergeProgramare();
+            //if(opt == 7) elibereazaDocument();
+            if (opt == 8) stergeDocument();
+        }
     }
 
     public void afisareMeniuClient(String username){
-        System.out.println("\t\t MENIU:\n");
-        System.out.println("\n\t Alegeti dintre urmatoarele optiuni:");
-        System.out.println("\n\t 1. Afisare angajati.");
-        System.out.println("\n\t 2. Afisare programari.");
-        System.out.println("\n\t 3. Afiseaza documente personale.");
-        System.out.println("\n\t 4. Obtine valabilitate trimitere medicala personala.");
-        System.out.println("\n\t 5. Adauga programare.");
-        System.out.println("\n\t 6. Sterge programare.");
+        int opt = 0;
+        while(opt != 7) {
+            System.out.println("\n\t-------------------------------------------\n");
+            System.out.println("\t\t MENIU:\n");
+            System.out.println("\t Alegeti dintre urmatoarele optiuni:");
+            System.out.println("\t 1. Afisare angajati.");
+            System.out.println("\t 2. Afisare programari.");
+            System.out.println("\t 3. Afiseaza documente personale.");
+            System.out.println("\t 4. Obtine valabilitate trimitere medicala personala.");
+            System.out.println("\t 5. Adauga programare.");
+            System.out.println("\t 6. Sterge programare.");
+            System.out.println("\t 7. Exit.\n");
 
 
-        Scanner scanner = new Scanner(System.in);
-        int opt = scanner.nextInt();
+            Scanner scanner = new Scanner(System.in);
+            opt = scanner.nextInt();
 
-        if(opt == 1) afisareAngajati();
-        if(opt == 2) afisareProgramari();
-        if(opt == 3) afisareDocumente("permis");
-        if(opt == 4) calculValabilitate("permis");
-        //if(opt == 5) adaugaProgramare(username);
-        if(opt == 6) stergeProgramare();
+            if (opt == 1) afisareAngajati();
+            if (opt == 2) afisareProgramari();
+            if (opt == 3) afisareDocumente("permis");
+            if (opt == 4) calculValabilitate("permis");
+            //if(opt == 5) adaugaProgramare(username);
+            if (opt == 6) stergeProgramare();
+        }
     }
 
     public void afisareServicii(){
-        System.out.println("\t\t MENIU:\n");
-        System.out.println("\n\t Alegeti dintre urmatoarele optiuni:");
-        System.out.println("\n\t 1. Afisare angajati.");
-        System.out.println("\n\t 2. Sterge angajat.");
-        System.out.println("\n\t 3. Afisare pacienti.");
-        System.out.println("\n\t 4. Sterge pacient.");
-        System.out.println("\n\t 5. Afisare programari.");
-        System.out.println("\n\t 6. Sterge programare.");
-        System.out.println("\n\t 7. Calculeaza venit angajat.");
-        System.out.println("\n\t 8. Afiseaza documente.");
-        System.out.println("\n\t 9. Sterge document.");
+        int opt = 0;
+        while(opt != 10) {
+            System.out.println("\n\t-------------------------------------------\n");
+            System.out.println("\t\t MENIU:\n");
+            System.out.println("\t Alegeti dintre urmatoarele optiuni:");
+            System.out.println("\t 1. Afisare angajati.");
+            System.out.println("\t 2. Sterge angajat.");
+            System.out.println("\t 3. Afisare pacienti.");
+            System.out.println("\t 4. Sterge pacient.");
+            System.out.println("\t 5. Afisare programari.");
+            System.out.println("\t 6. Sterge programare.");
+            System.out.println("\t 7. Calculeaza venit angajat.");
+            System.out.println("\t 8. Afiseaza documente.");
+            System.out.println("\t 9. Sterge document.");
+            System.out.println("\t 7. Exit.\n");
 
-        Scanner scanner = new Scanner(System.in);
-        int opt = scanner.nextInt();
+            Scanner scanner = new Scanner(System.in);
+            opt = scanner.nextInt();
 
-        if(opt == 1) afisareAngajati();
-        if(opt == 2) stergeAngajat();
-        if(opt == 3) afisarePacienti();
-        if(opt == 4) stergePacient();
-        if(opt == 5) afisareProgramari();
-        if(opt == 6) stergeProgramare();
-        if(opt == 7) calcuVenit();
-        if(opt == 8) afisareDocumente("permis");
-        if(opt == 9) stergeDocument();
-
+            if (opt == 1) afisareAngajati();
+            if (opt == 2) stergeAngajat();
+            if (opt == 3) afisarePacienti();
+            if (opt == 4) stergePacient();
+            if (opt == 5) afisareProgramari();
+            if (opt == 6) stergeProgramare();
+            if (opt == 7) calcuVenit();
+            if (opt == 8) afisareDocumente("permis");
+            if (opt == 9) stergeDocument();
+        }
     }
 
     public void afisareMedici(){
@@ -269,7 +294,7 @@ public class Serviciu {
     }
 
     public void afisareAsistenti(){
-        System.out.println("Cabinetul medical are " + Asistent.getNrAsistenti() + " medici: ");
+        System.out.println("\nCabinetul medical are " + Asistent.getNrAsistenti() + " asistenti: ");
 
         for (Angajat m : c.angajati){
             if(m instanceof Asistent){
