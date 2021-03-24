@@ -2,6 +2,7 @@ package entities;
 
 import entities.document.Document;
 import entities.persoana.Pacient;
+import entities.persoana.angajat.Angajat;
 import entities.persoana.angajat.Asistent;
 import entities.persoana.angajat.Medic;
 
@@ -15,8 +16,7 @@ public class CabinetMedical {
     private String telefon;
     private double oraInceput;
     private double oraSfarsit;
-    List<Medic> medici = new ArrayList<Medic>();
-    List<Asistent> asistenti = new ArrayList<Asistent>();
+    List<Angajat> angajati = new ArrayList<Angajat>();
     List<Pacient> pacienti = new ArrayList<Pacient>();
     List<Programare> programari = new ArrayList<Programare>();
     List<Document> documente = new ArrayList<Document>();
@@ -38,36 +38,6 @@ public class CabinetMedical {
         return cabinet;
     }
 
-    public void adaugaMedic(Medic m){
-        medici.add(m);
-    }
-
-    public void adaugaAsistent(Asistent a){
-        asistenti.add(a);
-    }
-
-    public void stergeMedic(Medic m){
-        medici.remove(m);
-    }
-
-    public void stergeAsistent(Asistent a){
-        medici.remove(a);
-    }
-
-
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof CabinetMedical)) return false;
-        CabinetMedical that = (CabinetMedical) o;
-        return Double.compare(that.oraInceput, oraInceput) == 0 && Double.compare(that.oraSfarsit, oraSfarsit) == 0 && Objects.equals(numeCabinet, that.numeCabinet) && Objects.equals(adresa, that.adresa) && Objects.equals(medici, that.medici) && Objects.equals(asistenti, that.asistenti) && Objects.equals(telefon, that.telefon);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(numeCabinet, adresa, telefon, oraInceput, oraSfarsit, medici, asistenti, pacienti, documente, programari);
-    }
 
     public String getNumeCabinet() {
         return numeCabinet;
@@ -101,21 +71,6 @@ public class CabinetMedical {
         this.oraSfarsit = oraSfarsit;
     }
 
-    public List<Medic> getMedici() {
-        return medici;
-    }
-
-    public void setMedici(List<Medic> medici) {
-        this.medici = medici;
-    }
-
-    public List<Asistent> getAsistenti() {
-        return asistenti;
-    }
-
-    public void setAsistenti(List<Asistent> asistenti) {
-        this.asistenti = asistenti;
-    }
 
     public String getTelefon() {
         return telefon;
@@ -123,6 +78,38 @@ public class CabinetMedical {
 
     public void setTelefon(String telefon) {
         this.telefon = telefon;
+    }
+
+    public List<Angajat> getAngajati() {
+        return angajati;
+    }
+
+    public void setAngajati(List<Angajat> angajati) {
+        this.angajati = angajati;
+    }
+
+    public List<Pacient> getPacienti() {
+        return pacienti;
+    }
+
+    public void setPacienti(List<Pacient> pacienti) {
+        this.pacienti = pacienti;
+    }
+
+    public List<Programare> getProgramari() {
+        return programari;
+    }
+
+    public void setProgramari(List<Programare> programari) {
+        this.programari = programari;
+    }
+
+    public List<Document> getDocumente() {
+        return documente;
+    }
+
+    public void setDocumente(List<Document> documente) {
+        this.documente = documente;
     }
 
     @Override

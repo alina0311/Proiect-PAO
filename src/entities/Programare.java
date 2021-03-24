@@ -8,19 +8,19 @@ public class Programare {
     private int idProgramare;
     private String oraProgramare;
     private String dataProgramare;
-    private CabinetMedical cabinet;
     private Medic medic;
     private Asistent asistent;
     private Pacient pacient;
+    private static int nrProg;
 
-    public Programare(int idProgramare, String oraProgramare, String dataProgramare, CabinetMedical cabinet, Medic medic, Asistent asistent, Pacient pacient) {
+    public Programare(int idProgramare, String oraProgramare, String dataProgramare, Medic medic, Asistent asistent, Pacient pacient) {
         this.idProgramare = idProgramare;
         this.oraProgramare = oraProgramare;
         this.dataProgramare = dataProgramare;
         this.asistent = asistent;
-        this.cabinet = cabinet;
         this.medic = medic;
         this.pacient = pacient;
+        nrProg++;
     }
 
     public int getIdProgramare() {
@@ -47,13 +47,6 @@ public class Programare {
         this.dataProgramare = dataProgramare;
     }
 
-    public CabinetMedical getCabinet() {
-        return cabinet;
-    }
-
-    public void setCabinet(CabinetMedical cabinet) {
-        this.cabinet = cabinet;
-    }
 
     public Medic getMedic() {
         return medic;
@@ -78,4 +71,9 @@ public class Programare {
     public void setAsistent(Asistent asistent) {
         this.asistent = asistent;
     }
+
+    public static int getNrProg() {
+        return nrProg;
+    }
+
 }

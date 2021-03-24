@@ -1,7 +1,5 @@
 package entities.persoana.angajat;
 
-import entities.persoana.Persoana;
-
 import java.util.Objects;
 
 public class Asistent extends Angajat{
@@ -14,7 +12,7 @@ public class Asistent extends Angajat{
     }
 
     public Asistent(int idPersoana, String username, String email, String password, String nume, String prenume, String CNP, String dataNasterii, boolean gen, String adresa, String telefon, String dataAngajarii, float salariu, Specializare specializare, boolean lucruInTure) {
-        super(idPersoana, String username, String email, String password, nume, prenume, CNP, dataNasterii, gen, adresa, telefon, dataAngajarii, salariu, specializare);
+        super(idPersoana, username, email, password, nume, prenume, CNP, dataNasterii, gen, adresa, telefon, dataAngajarii, salariu, specializare);
         this.lucruInTure = lucruInTure;
         this.treapta = treapta;
         nrAsistenti++;
@@ -56,22 +54,6 @@ public class Asistent extends Angajat{
         return nrAsistenti;
     }
 
-
-    public float getOraInceput() {
-        return oraInceput;
-    }
-
-    public void setOraInceput(float oraInceput) {
-        this.oraInceput = oraInceput;
-    }
-
-    public float getOraSfarsit() {
-        return oraSfarsit;
-    }
-
-    public void setOraSfarsit(float oraSfarsit) {
-        this.oraSfarsit = oraSfarsit;
-    }
 
     public boolean isLucruInTure() {
         return lucruInTure;

@@ -1,11 +1,11 @@
 package entities.persoana.angajat;
 
-import entities.persoana.Persoana;
+import entities.persoana.User;
 
 import java.util.Objects;
 import java.util.regex.PatternSyntaxException;
 
-public abstract class Angajat extends Persoana {
+public abstract class Angajat extends User implements Comparable<User> {
     protected String dataAngajarii;
     protected float salariu;
     private Specializare specializare;
@@ -15,7 +15,7 @@ public abstract class Angajat extends Persoana {
         salariu = 0;
     }
 
-    public Angajat(int IdPersoana,  String username, String email, String password, String nume, String prenume, String CNP, String dataNasterii, boolean gen, String adresa, String telefon, String dataAngajarii, float salariu, Specializare specializare) {
+    public Angajat(int idPersoana,  String username, String email, String password, String nume, String prenume, String CNP, String dataNasterii, boolean gen, String adresa, String telefon, String dataAngajarii, float salariu, Specializare specializare) {
         super(idPersoana, username, email, password, nume, prenume, CNP, dataNasterii, gen, adresa, telefon);
         if (!dataAngajarii.matches("^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\\d\\d$")){
             throw new PatternSyntaxException("Data introdusa incorect!", "^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\\d\\d$", -1);
@@ -39,12 +39,12 @@ public abstract class Angajat extends Persoana {
         if (!(o instanceof Angajat)) return false;
         if (!super.equals(o)) return false;
         Angajat angajat = (Angajat) o;
-        return Float.compare(angajat.salariu, salariu) == 0 && Float.compare(angajat.oraInceput, oraInceput) == 0 && Float.compare(angajat.oraSfarsit, oraSfarsit) == 0 && Objects.equals(dataAngajarii, angajat.dataAngajarii) && Objects.equals(specializare, angajat.specializare);
+        return Float.compare(angajat.salariu, salariu) == 0 && Objects.equals(dataAngajarii, angajat.dataAngajarii) && specializare == angajat.specializare;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), dataAngajarii, salariu, specializare, oraInceput, oraSfarsit);
+        return Objects.hash(super.hashCode(), dataAngajarii, salariu, specializare);
     }
 
     public abstract double calculeazaVenit();

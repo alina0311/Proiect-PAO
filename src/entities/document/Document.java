@@ -11,6 +11,7 @@ public abstract class Document{
     protected String dataEliberarii;
     protected Medic medic;
     protected Pacient pacient;
+    protected static int nrDocumente;
 
     public Document(){
         this.dataEliberarii = "";
@@ -24,6 +25,7 @@ public abstract class Document{
             throw new PatternSyntaxException("Data introdusa incorect!", "^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\\d\\d$", -1);
         }
         this.dataEliberarii = dataEliberarii;
+        nrDocumente++;
     }
 
     abstract public void afiseaza();
@@ -80,4 +82,11 @@ public abstract class Document{
         this.docId = docId;
     }
 
+    public static int getNrDocumente() {
+        return nrDocumente;
+    }
+
+    public static void setNrDocumente(int nrDocumente) {
+        Document.nrDocumente = nrDocumente;
+    }
 }

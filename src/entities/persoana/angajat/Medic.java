@@ -1,7 +1,5 @@
 package entities.persoana.angajat;
 
-import entities.persoana.Persoana;
-
 import java.util.Objects;
 import java.util.regex.PatternSyntaxException;
 
@@ -69,19 +67,5 @@ public class Medic extends Angajat{
         this.parafa = parafa;
     }
 
-    public float getOraInceput() {
-        return oraInceput;
-    }
 
-    public void setOraInceput(float oraInceput) {
-        this.oraInceput = oraInceput;
-    }
-
-    public float getOraSfarsit() {
-        return oraSfarsit;
-    }
-
-    public void setOraSfarsit(float oraSfarsit) {
-        this.oraSfarsit = oraSfarsit;
-    }
 }

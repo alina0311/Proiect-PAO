@@ -7,7 +7,7 @@
 Limbaj: **Java**, IDE: **IntelliJ**.
 
 ---
-##Partea I:
+## Partea I:
 Cerinte:
 - [x] lista cu cel puțin 8 tipuri de obiecte
 - [x] lista cu cel puțin 10 acțiuni/interogări care se pot face în cadrul sistemului
@@ -15,8 +15,8 @@ Cerinte:
 - [x] cel puțin 2 colecții diferite capabile să gestioneze obiectele definite anterior dintre care cel puțin una sa fie sortata
 - [ ] cel puțin o clasă serviciu care sa expună operațiile sistemului
 - [ ] o clasa Main din care sunt făcute apeluri către servicii
-
-##Descrierea proiectului
+ 
+## Descrierea proiectului
 Proiectul cuprinde 17 clase:
 - 🟣 clasa **Cabinet Medical** - singleton
 - 🟣 clasa **User** - clasa abstracta
