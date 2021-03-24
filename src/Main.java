@@ -56,6 +56,6 @@ public class Main {
         //login pt client
         Serviciu s = new Serviciu();
         s.afisareLogin();
-
+        //s.afisarePacienti();
     }
 }

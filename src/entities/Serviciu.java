@@ -24,12 +24,12 @@ public class Serviciu {
     }
 
     public void afisareLogin(){
-        System.out.println("\t\t\t ------------- LOGIN -------------");
-        System.out.println("\n\t Alegeti cu ce cont va conectati:");
-        System.out.println("\n\t 1. Angajat.");
-        System.out.println("\n\t 2. Client.");
-        System.out.println("\n\t 3. Admin.");
-        System.out.println("\n\t 4 Nu am cont. Doresc sa ma inregistrez.");
+        System.out.println("\t\t ------------- LOGIN -------------");
+        System.out.println("\t\t Alegeti cu ce cont va conectati:");
+        System.out.println("\t\t 1. Angajat.");
+        System.out.println("\t\t 2. Client.");
+        System.out.println("\t\t 3. Admin.");
+        System.out.println("\t\t 4. Nu am cont. Doresc sa ma inregistrez.");
 
         Scanner scanner = new Scanner(System.in);
         int opt = scanner.nextInt();
@@ -61,6 +61,10 @@ public class Serviciu {
         System.out.println("Indroduceti o parola: ");
         String password = scanner.nextLine();
 
+        System.out.println("Indroduceti 0 pentru Masculin, 1 pentru Feminin: ");
+        int b = scanner.nextInt();
+        String newl = scanner.nextLine();
+
         System.out.println("Indroduceti numele de familie: ");
         String nume = scanner.nextLine();
 
@@ -73,12 +77,6 @@ public class Serviciu {
         System.out.println("Indroduceti data nasterii: ");
         String data = scanner.nextLine();
 
-        System.out.println("Indroduceti 0 pentru Masculin, 1 pentru Feminin: ");
-        int b = scanner.nextInt();
-        boolean gen;
-        if(b == 0) gen = false;
-        else gen = true;
-
         System.out.println("Indroduceti adresa: ");
         String adresa = scanner.nextLine();
 
@@ -87,8 +85,17 @@ public class Serviciu {
 
         int id = Pacient.getNrPacienti() + 1;
 
+        boolean gen;
+        if(b == 0) gen = false;
+        else gen = true;
+
         Pacient pa = new Pacient(id, username, email, password, nume, prenume, cnp, data, gen, adresa, telefon, null);
         c.pacienti.add(pa);
+        for(Pacient a : c.pacienti){
+            System.out.println(a.toString());
+        }
+
+        loginClient();
 
     }
 
@@ -126,11 +133,11 @@ public class Serviciu {
         int ok = 0;
         while(ok == 0){
 
-            System.out.println("\n\t Introdu username-ul: ");
+            System.out.println("\t Introdu username-ul: ");
             Scanner scanner = new Scanner(System.in);
             String username = scanner.nextLine();
 
-            System.out.println("\n\t Introdu parola: ");
+            System.out.println("\t Introdu parola: ");
             String parola = scanner.nextLine();
 
             Iterator itr = c.pacienti.iterator();
@@ -146,7 +153,7 @@ public class Serviciu {
                 break;
             }
             else{
-                System.out.println("Username sau parola gresita!!!");
+                System.out.println("\tUsername sau parola gresita!!!");
             }
         }
     }
