@@ -6,7 +6,7 @@ import entities.persoana.angajat.Asistent;
 import java.util.List;
 import java.util.Objects;
 
-public class Pacient extends Persoana{
+public class Pacient extends User{
     private int nrFisa;
     private List<Afectiune> afectiuni; //compozitie
     private static int nrPacienti;
@@ -15,8 +15,8 @@ public class Pacient extends Persoana{
         nrFisa = 0;
     };
 
-    public Pacient(String nume, String prenume, String CNP, String dataNasterii, boolean gen, String adresa, String telefon,  int nrFisa, List<Afectiune> afectiuni) {
-        super(nume, prenume, CNP, dataNasterii, gen, adresa, telefon);
+    public Pacient(int idPersoana,  String username, String email, String password, String nume, String prenume, String username, String email, String password, String CNP, String dataNasterii, boolean gen, String adresa, String telefon,  int nrFisa, List<Afectiune> afectiuni) {
+        super(idPersoana, username, email, password, nume, prenume, CNP, dataNasterii, gen, adresa, telefon, username, email, password);
         this.afectiuni = afectiuni;
         this.nrFisa = nrFisa;
         nrPacienti++;
@@ -70,4 +70,6 @@ public class Pacient extends Persoana{
     public void setAfectiuni(List<Afectiune> afectiuni) {
         this.afectiuni = afectiuni;
     }
+
+
 }

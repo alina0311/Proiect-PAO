@@ -1,5 +1,6 @@
 import entities.Afectiune;
 import entities.CabinetMedical;
+import entities.Serviciu;
 import entities.document.Reteta;
 import entities.persoana.Pacient;
 import entities.persoana.Persoana;
@@ -47,13 +48,14 @@ public class Main {
         List<Asistent> l2 = new ArrayList<Asistent>();
         l2.add(a);
 
-        CabinetMedical c = CabinetMedical.getCabinet();
+        Serviciu s = new Serviciu();
+        s.afisareServicii();
 
-        c.adaugaMedic(m);
-        c.adaugaAsistent(a);
-
-        c.afiseazaAsistentii();
-        c.afiseazaMedicii();
+//        c.adaugaMedic(m);
+//        c.adaugaAsistent(a);
+//
+//        c.afiseazaAsistentii();
+//        c.afiseazaMedicii();
 
 //        Map<String, Integer> med = new HashMap<String, Integer>();
 //        med.put("Furazolidona", 2);

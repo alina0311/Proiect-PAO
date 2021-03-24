@@ -1,5 +1,7 @@
 package entities;
 
+import entities.document.Document;
+import entities.persoana.Pacient;
 import entities.persoana.angajat.Asistent;
 import entities.persoana.angajat.Medic;
 
@@ -15,6 +17,9 @@ public class CabinetMedical {
     private double oraSfarsit;
     List<Medic> medici = new ArrayList<Medic>();
     List<Asistent> asistenti = new ArrayList<Asistent>();
+    List<Pacient> pacienti = new ArrayList<Pacient>();
+    List<Programare> programari = new ArrayList<Programare>();
+    List<Document> documente = new ArrayList<Document>();
     public static CabinetMedical cabinet;
 
     private CabinetMedical() {
@@ -49,23 +54,7 @@ public class CabinetMedical {
         medici.remove(a);
     }
 
-    public void afiseazaMedicii(){
-        System.out.println("Cabinetul medical are " + Medic.getNrMedici() + " medici: ");
 
-        for (Medic m : medici){
-            System.out.println(m.getNume() + " " + m.getPrenume());
-        }
-        System.out.println();
-    }
-
-    public void afiseazaAsistentii(){
-        System.out.println("Cabinetul medical are " +  Asistent.getNrAsistenti() +  " asistenti: ");
-
-        for (Asistent a : asistenti){
-            System.out.println(a.getNume() + " " +  a.getPrenume());
-        }
-        System.out.println();
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -77,7 +66,7 @@ public class CabinetMedical {
 
     @Override
     public int hashCode() {
-        return Objects.hash(numeCabinet, adresa, telefon, oraInceput, oraSfarsit, medici, asistenti);
+        return Objects.hash(numeCabinet, adresa, telefon, oraInceput, oraSfarsit, medici, asistenti, pacienti, documente, programari);
     }
 
     public String getNumeCabinet() {

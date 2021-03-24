@@ -19,6 +19,7 @@ public abstract class Persoana implements Comparable<Persoana>{
     protected boolean gen;
     protected String adresa;
     protected String telefon;
+    protected int idPersoana;
 
     public Persoana(){
         nume = "";
@@ -29,7 +30,7 @@ public abstract class Persoana implements Comparable<Persoana>{
 
     }
 
-    public Persoana(String nume, String prenume, String CNP, String dataNasterii, boolean gen, String adresa, String telefon) {
+    public Persoana(int idPersoana, String nume, String prenume, String CNP, String dataNasterii, boolean gen, String adresa, String telefon) {
 
         if (!telefon.matches("^0[0-9]{9}$")){
             throw new PatternSyntaxException("Numar de telefon incorect!", "^0[0-9]{9}$", -1);
@@ -41,6 +42,7 @@ public abstract class Persoana implements Comparable<Persoana>{
             throw new PatternSyntaxException("CNP gresit!", "\n" +
                     "^[0-9]{13}$", -1);
         }
+        this.idPersoana = idPersoana;
         this.nume = nume;
         this.prenume = prenume;
         this.CNP = CNP;
@@ -170,5 +172,13 @@ public abstract class Persoana implements Comparable<Persoana>{
 
     public void setTelefon(String telefon) {
         this.telefon = telefon;
+    }
+
+    public int getIdPersoana() {
+        return idPersoana;
+    }
+
+    public void setIdPersoana(int idPersoana) {
+        this.idPersoana = idPersoana;
     }
 }

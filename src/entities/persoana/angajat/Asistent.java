@@ -13,8 +13,8 @@ public class Asistent extends Angajat{
         lucruInTure = false;
     }
 
-    public Asistent(String nume, String prenume, String CNP, String dataNasterii, boolean gen, String adresa, String telefon, String dataAngajarii, float salariu, Specializare specializare, boolean lucruInTure) {
-        super(nume, prenume, CNP, dataNasterii, gen, adresa, telefon, dataAngajarii, salariu, specializare);
+    public Asistent(int idPersoana, String username, String email, String password, String nume, String prenume, String CNP, String dataNasterii, boolean gen, String adresa, String telefon, String dataAngajarii, float salariu, Specializare specializare, boolean lucruInTure) {
+        super(idPersoana, String username, String email, String password, nume, prenume, CNP, dataNasterii, gen, adresa, telefon, dataAngajarii, salariu, specializare);
         this.lucruInTure = lucruInTure;
         this.treapta = treapta;
         nrAsistenti++;

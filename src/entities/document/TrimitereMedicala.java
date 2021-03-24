@@ -3,6 +3,10 @@ package entities.document;
 import entities.persoana.Pacient;
 import entities.persoana.angajat.Medic;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Objects;
 import java.util.regex.PatternSyntaxException;
 
@@ -29,9 +33,26 @@ public class TrimitereMedicala extends Document{
 
     }
 
+    public int zileValabilitate(){
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date today = new Date();
+
+        Date exp = null;
+        try {
+            exp = new SimpleDateFormat("dd/MM/yyyy").parse(dataExprValabilitate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        long diff = Math.abs(today.getTime() - exp.getTime());
+        int diffDays = (int) (diff / (1000l * 60 * 60 * 24));
+
+        return diffDays;
+
+    }
+
     @Override
     public void afiseaza() {}
-
 
     @Override
     public String toString() {

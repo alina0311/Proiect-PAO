@@ -17,8 +17,8 @@ public class Medic extends Angajat{
     public Medic(){
     }
 
-    public Medic(String nume, String prenume, String CNP, String dataNasterii, boolean gen, String adresa, String telefon, String dataAngajarii, float salariu, Specializare specializare, int parafa, int treapta) {
-        super(nume, prenume, CNP, dataNasterii, gen, adresa, telefon, dataAngajarii, salariu, specializare);
+    public Medic(int idPersoana, String username, String email, String password, String nume, String prenume, String CNP, String dataNasterii, boolean gen, String adresa, String telefon, String dataAngajarii, float salariu, Specializare specializare, int parafa, int treapta) {
+        super(idPersoana, username, email, password, nume, prenume, CNP, dataNasterii, gen, adresa, telefon, dataAngajarii, salariu, specializare);
         this.parafa = parafa;
         if (treapta > 5 || treapta < 1){
             throw new PatternSyntaxException("Treapta este introdusa gresit. Aceasta este de la 1 la 5.", "", -1);

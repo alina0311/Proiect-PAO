@@ -1,6 +1,7 @@
 package entities;
 
 import entities.persoana.Pacient;
+import entities.persoana.angajat.Asistent;
 import entities.persoana.angajat.Medic;
 
 public class Programare {
@@ -9,12 +10,14 @@ public class Programare {
     private String dataProgramare;
     private CabinetMedical cabinet;
     private Medic medic;
+    private Asistent asistent;
     private Pacient pacient;
 
-    public Programare(int idProgramare, String oraProgramare, String dataProgramare, CabinetMedical cabinet, Medic medic, Pacient pacient) {
+    public Programare(int idProgramare, String oraProgramare, String dataProgramare, CabinetMedical cabinet, Medic medic, Asistent asistent, Pacient pacient) {
         this.idProgramare = idProgramare;
         this.oraProgramare = oraProgramare;
         this.dataProgramare = dataProgramare;
+        this.asistent = asistent;
         this.cabinet = cabinet;
         this.medic = medic;
         this.pacient = pacient;
@@ -66,5 +69,13 @@ public class Programare {
 
     public void setPacient(Pacient pacient) {
         this.pacient = pacient;
+    }
+
+    public Asistent getAsistent() {
+        return asistent;
+    }
+
+    public void setAsistent(Asistent asistent) {
+        this.asistent = asistent;
     }
 }

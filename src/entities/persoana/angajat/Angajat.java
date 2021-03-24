@@ -8,19 +8,15 @@ import java.util.regex.PatternSyntaxException;
 public abstract class Angajat extends Persoana {
     protected String dataAngajarii;
     protected float salariu;
-    protected float oraInceput;
-    protected float oraSfarsit;
     private Specializare specializare;
 
     public Angajat() {
         dataAngajarii = "";
         salariu = 0;
-        oraInceput = 0;
-        oraSfarsit = 0;
     }
 
-    public Angajat(String nume, String prenume, String CNP, String dataNasterii, boolean gen, String adresa, String telefon, String dataAngajarii, float salariu, Specializare specializare) {
-        super(nume, prenume, CNP, dataNasterii, gen, adresa, telefon);
+    public Angajat(int IdPersoana,  String username, String email, String password, String nume, String prenume, String CNP, String dataNasterii, boolean gen, String adresa, String telefon, String dataAngajarii, float salariu, Specializare specializare) {
+        super(idPersoana, username, email, password, nume, prenume, CNP, dataNasterii, gen, adresa, telefon);
         if (!dataAngajarii.matches("^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\\d\\d$")){
             throw new PatternSyntaxException("Data introdusa incorect!", "^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\\d\\d$", -1);
         }

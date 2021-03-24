@@ -79,4 +79,5 @@ public abstract class Document{
     public void setDocId(int docId) {
         this.docId = docId;
     }
+
 }
