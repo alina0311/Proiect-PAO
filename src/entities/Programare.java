@@ -76,4 +76,10 @@ public class Programare {
         return nrProg;
     }
 
+    @Override
+    public String toString() {
+        return "id Programare:" + idProgramare + '\n' +
+                "ora Programare:" + oraProgramare + '\n' +
+                "data Programare:" + dataProgramare + '\n';
+    }
 }

@@ -32,7 +32,7 @@ public abstract class Document{
 
     @Override
     public String toString() {
-        return "Data eliberarii: " + dataEliberarii + '\n' +
+        return "\nData eliberarii: " + dataEliberarii + '\n' +
                 "Documentul a fost eliberat de catre: Doctor " + medic.getNume() + " " + medic.getPrenume() +
                 " pentru pacientul " + pacient.getNume() + " " + pacient.getPrenume() + ".\n";
     }

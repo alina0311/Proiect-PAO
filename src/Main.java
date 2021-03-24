@@ -1,43 +1,18 @@
 import entities.Afectiune;
 import entities.Programare;
 import entities.Serviciu;
+import entities.document.*;
 import entities.persoana.Pacient;
 import entities.persoana.angajat.Asistent;
 import entities.persoana.angajat.Medic;
 import entities.persoana.angajat.Specializare;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Main {
 
 
     public static void main(String[] args) {
-
-
-//        System.out.println("Venitul asistentului " + a.getNumeComplet() + " este de: " + a.calculeazaVenit());
-//        System.out.println("Venitul medicului " + m.getNumeComplet() + " este de: " + m.calculeazaVenit());
-//
-//        List<Medic> l1 = new ArrayList<Medic>();
-//        l1.add(m);
-//
-//        List<Asistent> l2 = new ArrayList<Asistent>();
-//        l2.add(a);
-//
-//        Serviciu s = new Serviciu();
-//        s.afisareServicii();
-
-//        c.adaugaMedic(m);
-//        c.adaugaAsistent(a);
-//
-//        c.afiseazaAsistentii();
-//        c.afiseazaMedicii();
-
-//        Map<String, Integer> med = new HashMap<String, Integer>();
-//        med.put("Furazolidona", 2);
-//        med.put("Paracetamol", 3);
-//        Reteta re = new Reteta("31/10/2009", m, pa, med);
-//        System.out.println(re.toString());
 
         Serviciu s = new Serviciu();
 
@@ -72,12 +47,25 @@ public class Main {
         s.adaugaProg(pro2);
         s.adaugaProg(pro3);
 
+        Document d1 = new AdeverintaConcediu(40, "21/11/2020", m1, p4, 30, "29/11/2020");
+        Document d2 = new AdeverintaMedicala(41, "26/08/2020", m2, p2, "scoala", true);
+        Document d3 = new TrimitereMedicala(42, "14/02/2020", m1, p2, "bilet de trimitere", "27/03/2021", "boli infectioase");
+
+        TreeMap<String, Integer> med = new TreeMap<String, Integer>();
+        med.put("Furazolidona", 2);
+        med.put("Paracetamol", 3);
+        Reteta d4 = new Reteta(43, "31/10/2009", m2, p1, med);
+
+        s.adaugaDoc(d1);
+        s.adaugaDoc(d2);
+        s.adaugaDoc(d3);
+        s.adaugaDoc(d4);
 
 
         //s.afisareAngajati();
 
-        //s.afisareLogin();
-        s.afisareMeniuAngajat();
+        s.afisareLogin();
+        //s.afisareMeniuAngajat();
 
 
 
