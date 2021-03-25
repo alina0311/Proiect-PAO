@@ -1,5 +1,4 @@
 # Proiect - Sistem de gestiune a programarilor unui cabinet medical
-
 ---
 
 **Tema proiectului**: crearea unui sistem de gestiune a programarilor unui cabinet medical si stocarea informatiilor despre clienti, angajati, documente si programari.
@@ -13,23 +12,53 @@ Cerinte:
 - [x] lista cu cel puțin 10 acțiuni/interogări care se pot face în cadrul sistemului
 - [x] clase simple cu atribute private/protected și metode de acces
 - [x] cel puțin 2 colecții diferite capabile să gestioneze obiectele definite anterior dintre care cel puțin una sa fie sortata
-- [ ] cel puțin o clasă serviciu care sa expună operațiile sistemului
-- [ ] o clasa Main din care sunt făcute apeluri către servicii
+- [x] cel puțin o clasă serviciu care sa expună operațiile sistemului
+- [x] o clasa Main din care sunt făcute apeluri către servicii
  
 ## Descrierea proiectului
-Proiectul cuprinde 17 clase:
-- 🟣 clasa **Cabinet Medical** - singleton
-- 🟣 clasa **User** - clasa abstracta
+###Proiectul cuprinde 16 clase:
+
+- 🟣 clasa **Afectiune**
+- 🟣 clasa **User** - clasa abstracta din care sunt mostenite:
     - clasa **Angajat** - sunt mostenite clasele **Medic** si **Asistent**
-    - clasa **Pacient**
+    - clasa **Pacient** - utilizat conceptul de *compunere* cu clasa **Afectiune** (retinem o lista de afectiuni)
     
-- 🟣 clasa **Document** - clasa abstracta din care sunt mostenite urmatoarele clase:
+- 🟣 clasa **Document** - utilizat conceptul de *compunere* cu clasa **Medic** si **Pacient**. Este o clasa abstracta din care sunt mostenite urmatoarele clase:
     - clasa **Adeverinta Concediu**
     - clasa **Adeverinta Medicala** 
-    - clasa **Reteta**
+    - clasa **Reteta** - utilizat *TreeMap* pentru a retine perechi de tipul medicament:nr;
     - clasa **Trimitere Medicala**
 
-- 🟣 clasa **Afectiune** 
-- 🟣 clasa **Programare** 
+- 🟣 enumul **Specializare** care apare in clasele **Medic** si **Asistent**.
+- 🟣 clasa **Programare** - *compunere* **Medic**, **Asistent**, **Pacient**.
+- 🟣 clasa **Cabinet Medical** - singleton: contine liste de tip *ArrayList* pentru documente, pacienti, programari si angajati;
 - 🟣 clasa **Serviciu** - clasa in care sunt implementate metode sau interogari in functie de rolul userului: angajat, admin sau pacient.
 - 🟣 clasa **Main** - din aceasta clasa se fac apeluri catre servicii.
+
+###Functionalitati:
+- login: in functie de client, angajat, admin sau user neinregistrat;
+- register: pentru pacientii neinregistrati in sistem;
+- 3 meniuri: in functie de contul asociati: client, angajat sau admin;
+
+####Functionalitati client:
+- 🟡 afisarea angajatilor: doar medicii, doar asistentii sau toti angajatii;
+- 🟡 afisarea programarilor pe o zi selectata de el;
+- 🟡 afisarea documentelor din sistem care ii apartin;
+- 🟡 calculul valabilitatii ramase a unei trimiteri medicale care ii apartine;
+- 🟡 adaugarea unei programari;
+- 🟡 stergerea unei programari proprii.
+
+####Functionalitati angajat:
+- 🟢  afisarea angajatilor: doar medicii, doar asistentii sau toti angajatii;
+- 🟢  afisarea tuturor pacientilor;
+- 🟢  afisarea programarilor pe o zi selectata de el;
+- 🟢  afisarea tutoror documentelor;
+- 🟢  calculul valabilitatii ramase a unei trimiteri medicale oarecare;
+- 🟢  eliberarea unui document;
+- 🟢  stergerea unui document;
+- 🟢  stergerea unei programari.
+
+####Functionalitati adminului (pe langa cele ale unui angajat):
+- 🔵 stergerea unui angajat;
+- 🔵 stergerea unui pacient;
+- 🔵 calculul venitului unui angajat in functie de rolul sau: pentru medici se ia in considerare treaapta profesionala, iar pentru asistenti daca lucreaza sau nu in ture;

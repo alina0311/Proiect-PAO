@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class Pacient extends User{
-    private List<Afectiune> afectiuni; //compozitie
+    private List<Afectiune> afectiuni; //compunere
     private static int nrPacienti;
 
     public Pacient(){
