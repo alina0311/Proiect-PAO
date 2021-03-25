@@ -67,5 +67,7 @@ public class Medic extends Angajat{
         this.parafa = parafa;
     }
 
-
+    public static void setNrMedici(int nrMedici) {
+        Medic.nrMedici = nrMedici;
+    }
 }

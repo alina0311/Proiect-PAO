@@ -50,7 +50,6 @@ public class Serviciu {
     public void adaugaPacient(Pacient p){
         c.pacienti.add(p);
     }
-
     public void adaugaAngajat(Angajat a){
         c.angajati.add(a);
     }
@@ -102,10 +101,8 @@ public class Serviciu {
 
         Pacient pa = new Pacient(id, username, email, password, nume, prenume, cnp, data, gen, adresa, telefon, null);
         c.pacienti.add(pa);
-        for(Pacient a : c.pacienti){
-            System.out.println(a.toString());
-        }
 
+        System.out.println("Cont creat cu succes!");
         loginClient();
 
     }
@@ -218,7 +215,7 @@ public class Serviciu {
             if (opt == 3) afisareProgramari();
             if (opt == 4) afisareDocumente("permis");
             if (opt == 5) calculValabilitate("permis");
-            if (opt == 6) stergeProgramare();
+            if (opt == 6) stergeProgramare("permis");
             if (opt == 7) elibereazaDocument();
             if (opt == 8) stergeDocument();
         }
@@ -244,10 +241,10 @@ public class Serviciu {
 
             if (opt == 1) afisareAngajati();
             if (opt == 2) afisareProgramari();
-            if (opt == 3) afisareDocumente("permis");
-            if (opt == 4) calculValabilitate("permis");
-            //if(opt == 5) adaugaProgramare(username);
-            if (opt == 6) stergeProgramare();
+            if (opt == 3) afisareDocumente(username);
+            if (opt == 4) calculValabilitate(username);
+            if (opt == 5) adaugaProgramare(username);
+            if (opt == 6) stergeProgramare(username);
         }
     }
 
@@ -276,7 +273,7 @@ public class Serviciu {
             if (opt == 3) afisarePacienti();
             if (opt == 4) stergePacient();
             if (opt == 5) afisareProgramari();
-            if (opt == 6) stergeProgramare();
+            if (opt == 6) stergeProgramare("permis");
             if (opt == 7) calcuVenit();
             if (opt == 8) afisareDocumente("permis");
             if (opt == 9) stergeDocument();
@@ -343,10 +340,18 @@ public class Serviciu {
         System.out.println("\t Indroduceti CNP-ul: ");
         Scanner scanner = new Scanner(System.in);
         String cnp = scanner.nextLine();
+        int m = 0;
+        int a = 0;
 
         Iterator itr = c.angajati.iterator();
         while (itr.hasNext()) {
-            Medic x = (Medic)itr.next();
+            Angajat x = (Angajat)itr.next();
+            if(x instanceof Medic){
+                m++;
+            }
+            if(x instanceof Asistent){
+                a++;
+            }
             if (x.getCNP().equals(cnp)){
                 itr.remove();
                 ok = 1;
@@ -355,6 +360,15 @@ public class Serviciu {
 
         if(ok == 0){
             System.out.println("Nu exista angajatul in baza de date!");
+        }
+        else{
+            System.out.println("Angajatul a fost sters cu succes!");
+            if(m > 0){
+                Medic.setNrMedici(Medic.getNrMedici() - 1);
+            }
+            if(a > 0){
+                Asistent.setNrAsistenti(Asistent.getNrAsistenti() - 1);
+            }
         }
 
     }
@@ -384,6 +398,10 @@ public class Serviciu {
         if(ok == 0){
             System.out.println("Nu exista pacientul in baza de date!");
         }
+        else{
+            System.out.println("Pacientul a fost sters din baza de date!");
+            Pacient.setNrPacienti(Pacient.getNrPacienti() - 1);
+        }
 
     }
 
@@ -412,48 +430,49 @@ public class Serviciu {
                 System.out.println(a.toString());
         }
     }
-//
-//    public void adaugaProgramare(String username){
-//        System.out.println("\t Introduceti ora programarii: ");
-//        Scanner scanner = new Scanner(System.in);
-//        String ora = scanner.nextLine();
-//
-//        System.out.println("\t Introduceti data programarii: ");
-//        String data = scanner.nextLine();
-//
-//        System.out.println("\t Introduceti numele doctorului: ");
-//        String numeDoctor = scanner.nextLine();
-//
-//        System.out.println("\t Introduceti numele asistentului: ");
-//        String numeAsistent = scanner.nextLine();
-//
-//        Medic m = new Medic();
-//        Angajat as = new Asistent();
-//
-//
-//        int id = Programare.getNrProg() + 1;
-//        for(Angajat a : c.angajati){
-//            if(a.getNume().equals(numeDoctor))
-//                m = a;
-//            if(a.getNume().equals(numeAsistent))
-//                as = a;
-//
-//        }
-//
-//        for(Pacient pac : c.pacienti){
-//            if (pac.getUsername().equals(username)) {
-//                Pacient p = new Pacient();
-//                p = pac;
-//            }
-//
-//        }
-//
-//        Programare pr = new Programare(id, ora, data, m, as, p);
-//        c.programari.add(pr);
-//
-//    }
 
-    public void stergeProgramare(){
+    public void adaugaProgramare(String username){
+        System.out.println("\t Introduceti ora programarii: ");
+        Scanner scanner = new Scanner(System.in);
+        String ora = scanner.nextLine();
+
+        System.out.println("\t Introduceti data programarii: ");
+        String data = scanner.nextLine();
+
+        System.out.println("\t Introduceti numele doctorului: ");
+        String numeDoctor = scanner.nextLine();
+
+        System.out.println("\t Introduceti numele asistentului: ");
+        String numeAsistent = scanner.nextLine();
+
+        Medic m = new Medic();
+        Asistent as = new Asistent();
+        Pacient p = new Pacient();
+
+        int id = Programare.getNrProg() + 1;
+        for(Angajat a : c.angajati){
+            if(a.getNume().equals(numeDoctor))
+                m = (Medic) a;
+            if(a.getNume().equals(numeAsistent))
+                as = (Asistent) a;
+
+        }
+
+        for(Pacient pac : c.pacienti){
+            if (pac.getUsername().equals(username)) {
+                p = pac;
+            }
+
+        }
+
+        Programare pr = new Programare(id, ora, data, m, as, p);
+        c.programari.add(pr);
+
+        System.out.println("Programarea a fost adauga cu succes!");
+
+    }
+
+    public void stergeProgramare(String username){
         int ok = 0;
 
         System.out.println("\t Introduceti CNP-ul pacientului: ");
@@ -466,7 +485,7 @@ public class Serviciu {
         Iterator itr = c.programari.iterator();
         while (itr.hasNext()) {
             Programare x = (Programare) itr.next();
-            if (x.getPacient().getCNP().equals(cnp) && x.getDataProgramare().equals(data)){
+            if (x.getPacient().getCNP().equals(cnp) && x.getDataProgramare().equals(data) && (x.getPacient().getUsername().equals(username) || username.equals("permis"))){
                 itr.remove();
                 ok = 1;
             }
@@ -477,6 +496,7 @@ public class Serviciu {
         }
         else{
             System.out.println("Programarea a fost stearsa cu succes!");
+            Programare.setNrProg(Programare.getNrProg() - 1);
         }
     }
 
@@ -500,9 +520,12 @@ public class Serviciu {
         }
     }
     public void elibereazaDocument(){
-        System.out.println("\t Ce tip de document doresti sa eliberezi? ");
-        System.out.println("\t Apasa 1 pentru adeverinta de concediu, 2 pentru adeverinta medicala");
-        System.out.println("\t 3 pentru trimitere medicala, 4 pentru reteta");
+        System.out.println("\t Introdu:");
+        System.out.println("\t 1 pentru a elibera adeverinta de concediu");
+        System.out.println("\t 2 pentru a elibera adeverinta medicala");
+        System.out.println("\t 3 pentru a elibera trimitere medicala");
+        System.out.println("\t 4 pentru a elibera o reteta");
+
         Scanner scanner = new Scanner(System.in);
         int opt = scanner.nextInt();
         String ok = scanner.nextLine();
@@ -615,26 +638,26 @@ public class Serviciu {
         }
         else{
             System.out.println("Documentul a fost sters cu succes!");
+            Document.setNrDocumente(Document.getNrDocumente() - 1);
         }
     }
 
-    public double calcuVenit(){
+    public void calcuVenit(){
         double v = 0;
 
-        System.out.println("\t Introduceti id-ul persoanei: ");
+        System.out.println("\t Introduceti CNP-ul persoanei: ");
         Scanner scanner = new Scanner(System.in);
-        int id = scanner.nextInt();
+        String cnp = scanner.nextLine();
 
         Iterator itr = c.angajati.iterator();
         while (itr.hasNext()) {
-            Asistent x = (Asistent) itr.next();
-            if (x.getIdPersoana() == id) {
+            Angajat x = (Angajat) itr.next();
+            if (x.getCNP().equals(cnp)) {
                 v = x.calculeazaVenit();
             }
         }
 
-
-        return v;
+        System.out.println("Venitul este: " + v);
     }
 
     public void calculValabilitate(String username){
@@ -656,7 +679,7 @@ public class Serviciu {
         else{
             Iterator itr = c.documente.iterator();
             while (itr.hasNext()) {
-                TrimitereMedicala x = (TrimitereMedicala) itr.next();
+                Document x = (Document) itr.next();
                 if (x.getDocId() == id && x.getPacient().getUsername().equals(username)) {
                     TrimitereMedicala tm = (TrimitereMedicala) x;
                     d = tm.zileValabilitate();

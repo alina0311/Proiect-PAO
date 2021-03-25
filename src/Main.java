@@ -66,7 +66,7 @@ public class Main {
 
         s.afisareLogin();
         //s.afisareMeniuAngajat();
-
+        //admin: username: admin, parola: admin1234
 
 
 

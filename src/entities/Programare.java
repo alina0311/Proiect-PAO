@@ -76,6 +76,10 @@ public class Programare {
         return nrProg;
     }
 
+    public static void setNrProg(int nrProg) {
+        Programare.nrProg = nrProg;
+    }
+
     @Override
     public String toString() {
         return "id Programare:" + idProgramare + '\n' +

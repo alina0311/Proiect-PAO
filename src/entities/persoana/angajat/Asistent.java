@@ -62,4 +62,8 @@ public class Asistent extends Angajat{
     public void setLucruInTure(boolean lucruInTure) {
         this.lucruInTure = lucruInTure;
     }
+
+    public static void setNrAsistenti(int nrAsistenti) {
+        Asistent.nrAsistenti = nrAsistenti;
+    }
 }

@@ -89,4 +89,6 @@ public abstract class Document{
     public static void setNrDocumente(int nrDocumente) {
         Document.nrDocumente = nrDocumente;
     }
+
+
 }
