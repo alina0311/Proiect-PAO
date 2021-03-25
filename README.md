@@ -1,5 +1,5 @@
 # Proiect - Sistem de gestiune a programarilor unui cabinet medical
----
+
 
 **Tema proiectului**: crearea unui sistem de gestiune a programarilor unui cabinet medical si stocarea informatiilor despre clienti, angajati, documente si programari.
 
@@ -16,7 +16,7 @@ Cerinte:
 - [x] o clasa Main din care sunt făcute apeluri către servicii
  
 ## Descrierea proiectului
-###Proiectul cuprinde 16 clase:
+### Proiectul cuprinde 16 clase:
 
 - 🟣 clasa **Afectiune**
 - 🟣 clasa **User** - clasa abstracta din care sunt mostenite:
@@ -35,12 +35,12 @@ Cerinte:
 - 🟣 clasa **Serviciu** - clasa in care sunt implementate metode sau interogari in functie de rolul userului: angajat, admin sau pacient.
 - 🟣 clasa **Main** - din aceasta clasa se fac apeluri catre servicii.
 
-###Functionalitati:
+### Functionalitati:
 - login: in functie de client, angajat, admin sau user neinregistrat;
 - register: pentru pacientii neinregistrati in sistem;
 - 3 meniuri: in functie de contul asociati: client, angajat sau admin;
 
-####Functionalitati client:
+#### Functionalitati client:
 - 🟡 afisarea angajatilor: doar medicii, doar asistentii sau toti angajatii;
 - 🟡 afisarea programarilor pe o zi selectata de el;
 - 🟡 afisarea documentelor din sistem care ii apartin;
@@ -48,7 +48,7 @@ Cerinte:
 - 🟡 adaugarea unei programari;
 - 🟡 stergerea unei programari proprii.
 
-####Functionalitati angajat:
+#### Functionalitati angajat:
 - 🟢  afisarea angajatilor: doar medicii, doar asistentii sau toti angajatii;
 - 🟢  afisarea tuturor pacientilor;
 - 🟢  afisarea programarilor pe o zi selectata de el;
@@ -58,7 +58,7 @@ Cerinte:
 - 🟢  stergerea unui document;
 - 🟢  stergerea unei programari.
 
-####Functionalitati adminului (pe langa cele ale unui angajat):
+#### Functionalitati adminului (pe langa cele ale unui angajat):
 - 🔵 stergerea unui angajat;
 - 🔵 stergerea unui pacient;
 - 🔵 calculul venitului unui angajat in functie de rolul sau: pentru medici se ia in considerare treaapta profesionala, iar pentru asistenti daca lucreaza sau nu in ture;
