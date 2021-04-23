@@ -5,22 +5,26 @@ import entities.persoana.Pacient;
 import entities.persoana.angajat.Angajat;
 import entities.persoana.angajat.Asistent;
 import entities.persoana.angajat.Medic;
-import entities.persoana.User;
+import entities.serviciu.ServiciuDocument;
+import entities.serviciu.ServiciuProgramare;
 
-import javax.print.Doc;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Serviciu {
-    CabinetMedical c = CabinetMedical.getCabinet();
+    static CabinetMedical c = CabinetMedical.getCabinet();
+    ServiciuProgramare cp = ServiciuProgramare.getCP();
+    ServiciuDocument ac = ServiciuDocument.getCP();
 
     public Serviciu(){
 
     }
 
     public void afisareLogin(){
+        cp.incarcareProgramari("Programari.csv");
+        ac.incarcareAdeverinteC("AdeverinteConcediu.csv");
+
         System.out.println("\t\t ------------- LOGIN -------------");
         System.out.println("\t\t Alegeti cu ce cont va conectati:");
         System.out.println("\t\t 1. Angajat.");
@@ -216,7 +220,7 @@ public class Serviciu {
             if (opt == 4) afisareDocumente("permis");
             if (opt == 5) calculValabilitate("permis");
             if (opt == 6) stergeProgramare("permis");
-            if (opt == 7) elibereazaDocument();
+            if (opt == 7) ac.elibereazaDocument();
             if (opt == 8) stergeDocument();
         }
     }
@@ -243,7 +247,7 @@ public class Serviciu {
             if (opt == 2) afisareProgramari();
             if (opt == 3) afisareDocumente(username);
             if (opt == 4) calculValabilitate(username);
-            if (opt == 5) adaugaProgramare(username);
+            if (opt == 5) cp.adaugaProgramare(username);
             if (opt == 6) stergeProgramare(username);
         }
     }
@@ -320,6 +324,19 @@ public class Serviciu {
             while(opt != 1 && opt != 2 && opt != 3)
                 System.out.println("Introduceti o optiune valida! (1, 2, 3).");
 
+
+    }
+
+    public static void afisareProgramari(){
+        System.out.println("\t  Introdu data in care vrei sa vezi programarile: ");
+        Scanner scanner = new Scanner(System.in);
+        String data = scanner.nextLine();
+
+        System.out.println("Cabinetul medical are urmatoarele programari pentru data respectiva: ");
+
+        for (Programare p : c.getProgramari())
+            if(p.getDataProgramare().equals(data))
+            { System.out.println(p.toString()); }
 
     }
 
@@ -418,59 +435,7 @@ public class Serviciu {
         return nr;
     }
 
-    public void afisareProgramari(){
-        System.out.println("\t  Introdu data in care vrei sa vezi programarile: ");
-        Scanner scanner = new Scanner(System.in);
-        String data = scanner.nextLine();
 
-        System.out.println("Cabinetul medical are " +  getNrProgramari(data) +  " programari pentru data respectiva: ");
-
-        for (Programare a : c.programari){
-            if(a.getDataProgramare().equals(data))
-                System.out.println(a.toString());
-        }
-    }
-
-    public void adaugaProgramare(String username){
-        System.out.println("\t Introduceti ora programarii: ");
-        Scanner scanner = new Scanner(System.in);
-        String ora = scanner.nextLine();
-
-        System.out.println("\t Introduceti data programarii: ");
-        String data = scanner.nextLine();
-
-        System.out.println("\t Introduceti numele doctorului: ");
-        String numeDoctor = scanner.nextLine();
-
-        System.out.println("\t Introduceti numele asistentului: ");
-        String numeAsistent = scanner.nextLine();
-
-        Medic m = new Medic();
-        Asistent as = new Asistent();
-        Pacient p = new Pacient();
-
-        int id = Programare.getNrProg() + 1;
-        for(Angajat a : c.angajati){
-            if(a.getNume().equals(numeDoctor))
-                m = (Medic) a;
-            if(a.getNume().equals(numeAsistent))
-                as = (Asistent) a;
-
-        }
-
-        for(Pacient pac : c.pacienti){
-            if (pac.getUsername().equals(username)) {
-                p = pac;
-            }
-
-        }
-
-        Programare pr = new Programare(id, ora, data, m, as, p);
-        c.programari.add(pr);
-
-        System.out.println("Programarea a fost adauga cu succes!");
-
-    }
 
     public void stergeProgramare(String username){
         int ok = 0;
@@ -519,104 +484,7 @@ public class Serviciu {
             }
         }
     }
-    public void elibereazaDocument(){
-        System.out.println("\t Introdu:");
-        System.out.println("\t 1 pentru a elibera adeverinta de concediu");
-        System.out.println("\t 2 pentru a elibera adeverinta medicala");
-        System.out.println("\t 3 pentru a elibera trimitere medicala");
-        System.out.println("\t 4 pentru a elibera o reteta");
 
-        Scanner scanner = new Scanner(System.in);
-        int opt = scanner.nextInt();
-        String ok = scanner.nextLine();
-
-        int id = Document.getNrDocumente() + 1;
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        Date today = new Date();
-        String str = dateFormat.format(today);
-
-        System.out.println("\t Introduceti numele medicului: ");
-        String nume = scanner.nextLine();
-
-        System.out.println("\t Introduceti prenumele medicului: ");
-        String prenume = scanner.nextLine();
-
-        System.out.println("\t Introduceti cnp-ul pacientului: ");
-        String cnp = scanner.nextLine();
-
-        Pacient p = new Pacient();
-        Medic m = new Medic();
-
-        for(Angajat a : c.angajati){
-            if(a.getNume().equals(nume) && a.getPrenume().equals(prenume))
-                m = (Medic) a;
-        }
-
-        for(Pacient a : c.pacienti){
-            if(a.getCNP().equals(cnp))
-                p = a;
-        }
-
-        if(opt == 1){
-            System.out.println("\t Introduceti zilele de concediu: ");
-            int zile = scanner.nextInt();
-            String ok1 = scanner.nextLine();
-
-            System.out.println("\t Introduceti data de inceput: ");
-            String data = scanner.nextLine();
-            AdeverintaConcediu d = new AdeverintaConcediu(id, str, m, p, zile, data);
-            c.documente.add(d);
-        }
-        if(opt == 2){
-            System.out.println("\t Introduceti scopul: ");
-            String scop = scanner.nextLine();
-
-            System.out.println("\t Este pacientul apt? Scrieti 1 daca da, sau 0 daca nu. ");
-            int aptin = scanner.nextInt();
-            boolean apt;
-            if(aptin == 0) apt = false;
-            else apt = true;
-
-            AdeverintaMedicala d = new AdeverintaMedicala(id, str, m, p, scop, apt);
-            c.documente.add(d);
-
-        }
-        if(opt == 3){
-            System.out.println("\t Introduceti scopul: ");
-            String scop = scanner.nextLine();
-
-            System.out.println("\t Introduceti data de expirare: ");
-            String data = scanner.nextLine();
-
-            System.out.println("\t Introduceti institutia catre care se face trimiterea: ");
-            String catre = scanner.nextLine();
-
-            TrimitereMedicala d = new TrimitereMedicala(id, str, m, p, scop, data, catre);
-            c.documente.add(d);
-        }
-        if(opt == 4){
-            System.out.println("\t Introduceti numarul de medicamente: ");
-            int nr = scanner.nextInt();
-            String ok2 = scanner.nextLine();
-
-            System.out.println("\t Introduceti pe cate o linie numele medicamentului si de cate ori pe zi trebuie administrat: ");
-
-            TreeMap<String, Integer> r = new TreeMap<String, Integer>();
-            String ret;
-
-            while(nr > 0){
-                ret = scanner.nextLine();
-                String med = ret.split(" ")[0];
-                int n = Integer.parseInt(ret.split(" ")[1]);
-                r.put(med, n);
-                nr--;
-            }
-            Reteta d = new Reteta(id, str, m, p, r);
-            c.documente.add(d);
-
-        }
-        System.out.println("Documentul a fost adaugat cu succes!");
-    }
     public void stergeDocument(){
         int ok = 0;
 

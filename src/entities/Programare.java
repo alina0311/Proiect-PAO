@@ -5,6 +5,7 @@ import entities.persoana.angajat.Asistent;
 import entities.persoana.angajat.Medic;
 
 public class Programare {
+
     private int idProgramare;
     private String oraProgramare;
     private String dataProgramare;

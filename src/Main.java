@@ -1,3 +1,9 @@
+//git add .
+//git commit -m "nume"
+//git push
+
+
+
 import entities.Afectiune;
 import entities.Programare;
 import entities.Serviciu;
@@ -24,8 +30,8 @@ public class Main {
 
         Pacient p1 = new Pacient(20, "maria.antoaneta", "maria@yahoo.com", "123", "Popescu", "Maria-Antoaneta", "6001103928412", "03/11/2000", true, "Str Florilor nr 100", "0720039457", afec);
         Pacient p2 = new Pacient(21, "iorda", "iordachescu@yahoo.com", "123", "Iordachescu", "Anca", "6001103928419", "28/02/1999", true, "Str Pallady nr 90", "0756299018", null);
-        Pacient p3 = new Pacient(21, "vlad11", "vlad@yahoo.com", "123", "Moisi", "Vlad", "6001109018419", "28/04/1999", false, "Str Tineretului nr 12", "0757209345", null);
-        Pacient p4 = new Pacient(21, "ionel1340", "ionel@yahoo.com", "123", "Grigorescu", "Ionel-Marian", "6001229928419", "13/09/1990", false, "Str Pallady nr 90", "0751203401", null);
+        Pacient p3 = new Pacient(22, "vlad11", "vlad@yahoo.com", "123", "Moisi", "Vlad", "6001109018419", "28/04/1999", false, "Str Tineretului nr 12", "0757209345", null);
+        Pacient p4 = new Pacient(23, "ionel1340", "ionel@yahoo.com", "123", "Grigorescu", "Ionel-Marian", "6001229928419", "13/09/1990", false, "Str Pallady nr 90", "0751203401", null);
         s.adaugaPacient(p1);
         s.adaugaPacient(p2);
         s.adaugaPacient(p3);
@@ -39,13 +45,13 @@ public class Main {
         s.adaugaAngajat(m2);
         s.adaugaAngajat(a1);
         s.adaugaAngajat(a2);
-
-        Programare pro1 = new Programare(30, "10.20", "06/03/2021", m1, a1, p1);
-        Programare pro2 = new Programare(31, "11.20", "06/03/2021", m2, a1, p3);
-        Programare pro3 = new Programare(32, "10.50", "20/03/2021", m2, a2, p4);
-        s.adaugaProg(pro1);
-        s.adaugaProg(pro2);
-        s.adaugaProg(pro3);
+//
+//        Programare pro1 = new Programare(30, "10.20", "06/03/2021", m1, a1, p1);
+//        Programare pro2 = new Programare(31, "11.20", "06/03/2021", m2, a1, p3);
+//        Programare pro3 = new Programare(32, "10.50", "20/03/2021", m2, a2, p4);
+//        s.adaugaProg(pro1);
+//        s.adaugaProg(pro2);
+//        s.adaugaProg(pro3);
 
         Document d1 = new AdeverintaConcediu(40, "21/11/2020", m1, p4, 30, "29/11/2020");
         Document d2 = new AdeverintaMedicala(41, "26/08/2020", m2, p2, "scoala", true);
