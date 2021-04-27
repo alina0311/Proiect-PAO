@@ -8,6 +8,7 @@ import entities.persoana.angajat.Angajat;
 import entities.persoana.angajat.Asistent;
 import entities.persoana.angajat.Medic;
 
+import javax.sound.midi.SysexMessage;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileWriter;
@@ -389,10 +390,10 @@ public class ServiciuDocument {
     }
 
 
-    public static void incarcareAdeverinteC(String fisier){
+    public static void incarcareDocumente(){
 
         List<Document> doc = c.getDocumente();
-        Path calea = Paths.get(fisier);
+        Path calea = Paths.get("AdeverinteConcediu.csv");
         try (BufferedReader buff = Files.newBufferedReader(calea, StandardCharsets.US_ASCII))
         {
             String rand = buff.readLine();
@@ -433,6 +434,176 @@ public class ServiciuDocument {
                 }
                 int zile = Integer.parseInt(a[4]);
                 AdeverintaConcediu ac = new AdeverintaConcediu(id, a[1], m, p, zile, a[5]);
+                if (doc.contains(ac) == false){
+                    doc.add(ac);
+                }
+
+
+                rand = buff.readLine();
+            }
+        } catch (IOException ioe) { ioe.printStackTrace(); }
+
+        c.setDocumente(doc);
+
+        calea = Paths.get("AdeverinteMedicale.csv");
+        try (BufferedReader buff = Files.newBufferedReader(calea, StandardCharsets.US_ASCII))
+        {
+            String rand = buff.readLine();
+            rand = buff.readLine();
+            while (rand != null)
+            {
+                int id, mid, pid;
+                String[] a = rand.split(",");
+
+                try {
+                    id = Integer.parseInt(a[0]);
+                    mid = Integer.parseInt(a[2]);
+                    pid = Integer.parseInt(a[3]);
+
+                }
+                catch (NumberFormatException e)
+                {
+                    id = 0;
+                    mid = 0;
+                    pid = 0;
+
+                }
+
+                Medic m = new Medic();
+                Pacient p = new Pacient();
+
+
+                for(Angajat an : c.getAngajati()){
+                    if(an.getIdPersoana() == mid)
+                        m = (Medic) an;
+                }
+
+                for(Pacient pac : c.getPacienti()){
+                    if (pac.getIdPersoana() == pid) {
+                        p = pac;
+                    }
+
+                }
+                boolean apt = Boolean.parseBoolean(a[5]);
+                AdeverintaMedicala ac = new AdeverintaMedicala(id, a[1], m, p, a[4], apt);
+                if (doc.contains(ac) == false){
+                    doc.add(ac);
+                }
+
+
+                rand = buff.readLine();
+            }
+        } catch (IOException ioe) { ioe.printStackTrace(); }
+
+        c.setDocumente(doc);
+
+        calea = Paths.get("Retete.csv");
+        try (BufferedReader buff = Files.newBufferedReader(calea, StandardCharsets.US_ASCII))
+        {
+            String rand = buff.readLine();
+            rand = buff.readLine();
+            while (rand != null)
+            {
+                int id, mid, pid;
+                String[] a = rand.split(",");
+
+                try {
+                    id = Integer.parseInt(a[0]);
+                    mid = Integer.parseInt(a[2]);
+                    pid = Integer.parseInt(a[3]);
+
+                }
+                catch (NumberFormatException e)
+                {
+                    id = 0;
+                    mid = 0;
+                    pid = 0;
+
+                }
+
+                Medic m = new Medic();
+                Pacient p = new Pacient();
+
+
+                for(Angajat an : c.getAngajati()){
+                    if(an.getIdPersoana() == mid)
+                        m = (Medic) an;
+                }
+
+                for(Pacient pac : c.getPacienti()){
+                    if (pac.getIdPersoana() == pid) {
+                        p = pac;
+                    }
+
+                }
+
+                TreeMap<String, Integer> med = new TreeMap<String, Integer>();
+
+                String s = a[4]; //ultimul string
+                String[] perechi = s.split(">"); //splituiesc dupa > pt a lua perechile
+
+                for (String pereche : perechi) {
+                    String[] pr = pereche.split(":"); //acum pt a lua fiecare string si integer
+                    int nr = Integer.parseInt(pr[1]); //parsez nr pt medicamente
+                    med.put(pr[0], nr);
+                }
+
+
+
+                Reteta ac = new Reteta(id, a[1], m, p, med);
+                if (doc.contains(ac) == false){
+                    doc.add(ac);
+                }
+
+
+                rand = buff.readLine();
+            }
+        } catch (IOException ioe) { ioe.printStackTrace(); }
+
+        c.setDocumente(doc);
+
+
+        calea = Paths.get("TrimiteriMedicale.csv");
+        try (BufferedReader buff = Files.newBufferedReader(calea, StandardCharsets.US_ASCII))
+        {
+            String rand = buff.readLine();
+            rand = buff.readLine();
+            while (rand != null)
+            {
+                int id, mid, pid;
+                String[] a = rand.split(",");
+
+                try {
+                    id = Integer.parseInt(a[0]);
+                    mid = Integer.parseInt(a[2]);
+                    pid = Integer.parseInt(a[3]);
+
+                }
+                catch (NumberFormatException e)
+                {
+                    id = 0;
+                    mid = 0;
+                    pid = 0;
+
+                }
+
+                Medic m = new Medic();
+                Pacient p = new Pacient();
+
+
+                for(Angajat an : c.getAngajati()){
+                    if(an.getIdPersoana() == mid)
+                        m = (Medic) an;
+                }
+
+                for(Pacient pac : c.getPacienti()){
+                    if (pac.getIdPersoana() == pid) {
+                        p = pac;
+                    }
+
+                }
+
+                TrimitereMedicala ac = new TrimitereMedicala (id, a[1], m, p, a[4], a[5], a[6]);
                 if (doc.contains(ac) == false){
                     doc.add(ac);
                 }

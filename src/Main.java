@@ -2,8 +2,6 @@
 //git commit -m "nume"
 //git push
 
-
-
 import entities.Afectiune;
 import entities.Programare;
 import entities.Serviciu;
@@ -70,7 +68,10 @@ public class Main {
 
         //s.afisareAngajati();
 
+        //s.afisareProgramari();
+
         s.afisareLogin();
+
         //s.afisareMeniuAngajat();
         //admin: username: admin, parola: admin1234
 

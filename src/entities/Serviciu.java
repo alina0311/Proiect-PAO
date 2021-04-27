@@ -15,15 +15,13 @@ import java.util.*;
 public class Serviciu {
     static CabinetMedical c = CabinetMedical.getCabinet();
     ServiciuProgramare cp = ServiciuProgramare.getCP();
-    ServiciuDocument ac = ServiciuDocument.getCP();
+    ServiciuDocument cd = ServiciuDocument.getCP();
 
     public Serviciu(){
 
     }
 
     public void afisareLogin(){
-        cp.incarcareProgramari("Programari.csv");
-        ac.incarcareAdeverinteC("AdeverinteConcediu.csv");
 
         System.out.println("\t\t ------------- LOGIN -------------");
         System.out.println("\t\t Alegeti cu ce cont va conectati:");
@@ -112,6 +110,7 @@ public class Serviciu {
     }
 
     public void loginAngajat(){
+
         int ok = 0;
         while(ok == 0){
             System.out.println("\t Introdu username-ul: ");
@@ -196,6 +195,10 @@ public class Serviciu {
     }
 
     public void afisareMeniuAngajat(){
+        cp.incarcareProgramari("Programari.csv");
+        cd.incarcareDocumente();
+
+
         int opt = 0;
         while(opt != 9) {
             System.out.println("\n\t-------------------------------------------\n");
@@ -220,12 +223,16 @@ public class Serviciu {
             if (opt == 4) afisareDocumente("permis");
             if (opt == 5) calculValabilitate("permis");
             if (opt == 6) stergeProgramare("permis");
-            if (opt == 7) ac.elibereazaDocument();
+            if (opt == 7) cd.elibereazaDocument();
             if (opt == 8) stergeDocument();
         }
     }
 
     public void afisareMeniuClient(String username){
+        cp.incarcareProgramari("Programari.csv");
+        cd.incarcareDocumente();
+
+
         int opt = 0;
         while(opt != 7) {
             System.out.println("\n\t-------------------------------------------\n");
@@ -253,6 +260,10 @@ public class Serviciu {
     }
 
     public void afisareServicii(){
+        cp.incarcareProgramari("Programari.csv");
+        cd.incarcareDocumente();
+
+
         int opt = 0;
         while(opt != 10) {
             System.out.println("\n\t-------------------------------------------\n");
