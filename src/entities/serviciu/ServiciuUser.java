@@ -141,6 +141,8 @@ public class ServiciuUser {
         //s.incarcarePacienti();
         //Serviciu.loginClient();
 
+        Serviciu.getAudit().actiune("adaugarePacient");
+
     }
 
     public void adaugaAngajat(){
@@ -349,7 +351,7 @@ public class ServiciuUser {
             //Serviciu.loginClient();
         }
 
-
+        Serviciu.getAudit().actiune("adaugareAngajat");
 
     }
 

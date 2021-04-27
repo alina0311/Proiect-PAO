@@ -2,6 +2,7 @@ package entities.serviciu;
 
 import entities.CabinetMedical;
 import entities.Programare;
+import entities.Serviciu;
 import entities.document.*;
 import entities.persoana.Pacient;
 import entities.persoana.angajat.Angajat;
@@ -179,6 +180,7 @@ public class ServiciuDocument {
 
             System.out.println("Adeverinta medicala a fost eliberata cu succes!");
 
+
         }
         if(opt == 3){
             System.out.println("\t Introduceti scopul: ");
@@ -256,7 +258,7 @@ public class ServiciuDocument {
             Reteta d = new Reteta(id, str, m, p, r);
             c.getDocumente().add(d);
 
-            File file = new File("Retete.csv");
+            File file = new File("C:\\Users\\Alina\\IdeaProjects\\proiect\\csv_files\\Retete.csv");
             try {
                 if (!file.exists()) {
                     file.createNewFile();
@@ -303,7 +305,7 @@ public class ServiciuDocument {
             System.out.println("Reteta a fost eliberata cu succes!");
 
         }
-
+        Serviciu.getAudit().actiune("eliberareDocument");
     }
 
 

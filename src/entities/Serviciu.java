@@ -5,6 +5,7 @@ import entities.persoana.Pacient;
 import entities.persoana.angajat.Angajat;
 import entities.persoana.angajat.Asistent;
 import entities.persoana.angajat.Medic;
+import entities.serviciu.Audit;
 import entities.serviciu.ServiciuDocument;
 import entities.serviciu.ServiciuProgramare;
 import entities.serviciu.ServiciuUser;
@@ -18,6 +19,7 @@ public class Serviciu {
     static ServiciuProgramare cp = ServiciuProgramare.getCP();
     static ServiciuDocument cd = ServiciuDocument.getCP();
     static ServiciuUser cu = ServiciuUser.getCP();
+    static Audit audit = Audit.getCP();
 
     public Serviciu(){
 
@@ -53,20 +55,23 @@ public class Serviciu {
 
     }
 
-    public void adaugaPacient(Pacient p){
-        c.pacienti.add(p);
-    }
-    public void adaugaAngajat(Angajat a){
-        c.angajati.add(a);
-    }
-    public void adaugaProg(Programare p){
-        c.programari.add(p);
-    }
-    public void adaugaDoc(Document p){
-        c.documente.add(p);
-    }
+//    public void adaugaPacient(Pacient p){
+//        c.pacienti.add(p);
+//    }
+//    public void adaugaAngajat(Angajat a){
+//        c.angajati.add(a);
+//    }
+//    public void adaugaProg(Programare p){
+//        c.programari.add(p);
+//    }
+//    public void adaugaDoc(Document p){
+//        c.documente.add(p);
+//    }
 
 
+    public static Audit getAudit() {
+        return audit;
+    }
 
     public void loginAngajat(){
 
@@ -155,7 +160,7 @@ public class Serviciu {
     }
 
     public void afisareMeniuAngajat(){
-        cp.incarcareProgramari("C:\\Users\\Alina\\IdeaProjects\\proiect\\csv_files\\Programari.csv");
+        cp.incarcareProgramari();
         cd.incarcareDocumente();
         cu.incarcarePacienti();
         cu.incarcareAngajati();
@@ -190,7 +195,7 @@ public class Serviciu {
     }
 
     public static void afisareMeniuClient(String username){
-        cp.incarcareProgramari("C:\\Users\\Alina\\IdeaProjects\\proiect\\csv_files\\Programari.csv");
+        cp.incarcareProgramari();
         cd.incarcareDocumente();
         cu.incarcarePacienti();
         cu.incarcareAngajati();
@@ -222,7 +227,7 @@ public class Serviciu {
     }
 
     public void afisareServicii(){
-        cp.incarcareProgramari("C:\\Users\\Alina\\IdeaProjects\\proiect\\csv_files\\Programari.csv");
+        cp.incarcareProgramari();
         cd.incarcareDocumente();
         cu.incarcarePacienti();
         cu.incarcareAngajati();
@@ -317,15 +322,15 @@ public class Serviciu {
     }
 
 
-    public void adaugaMedic(Medic m){
-        Angajat a = m;
-        c.angajati.add(a);
-    }
-
-    public void adaugaAsistent(Asistent m){
-        Angajat a = m;
-        c.angajati.add(a);
-    }
+//    public void adaugaMedic(Medic m){
+//        Angajat a = m;
+//        c.angajati.add(a);
+//    }
+//
+//    public void adaugaAsistent(Asistent m){
+//        Angajat a = m;
+//        c.angajati.add(a);
+//    }
 
     public void stergeAngajat(){
         int ok = 0;
@@ -363,7 +368,7 @@ public class Serviciu {
                 Asistent.setNrAsistenti(Asistent.getNrAsistenti() - 1);
             }
         }
-
+        audit.actiune("stergereAngajat");
     }
     public void afisarePacienti(){
 
@@ -395,7 +400,7 @@ public class Serviciu {
             System.out.println("Pacientul a fost sters din baza de date!");
             Pacient.setNrPacienti(Pacient.getNrPacienti() - 1);
         }
-
+        audit.actiune("stergerePacient");
     }
 
     public int getNrProgramari(String data){
@@ -439,6 +444,7 @@ public class Serviciu {
             System.out.println("Programarea a fost stearsa cu succes!");
             Programare.setNrProg(Programare.getNrProg() - 1);
         }
+        audit.actiune("stergereProgramare");
     }
 
     public static void afisareDocumente(String username){
@@ -484,6 +490,7 @@ public class Serviciu {
             System.out.println("Documentul a fost sters cu succes!");
             Document.setNrDocumente(Document.getNrDocumente() - 1);
         }
+        audit.actiune("stergereDocument");
     }
 
     public void calcuVenit(){
@@ -502,6 +509,7 @@ public class Serviciu {
         }
 
         System.out.println("Venitul este: " + v);
+        audit.actiune("calculVenit");
     }
 
     public static void calculValabilitate(String username){
@@ -533,6 +541,7 @@ public class Serviciu {
         }
 
         System.out.println("\t Adeverinta mai este valabila " + d + " zile.");
+        audit.actiune("calculValabilitate");
     }
 
 

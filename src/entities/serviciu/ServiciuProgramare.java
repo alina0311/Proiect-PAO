@@ -2,6 +2,7 @@ package entities.serviciu;
 
 import entities.CabinetMedical;
 import entities.Programare;
+import entities.Serviciu;
 import entities.persoana.Pacient;
 import entities.persoana.angajat.Angajat;
 import entities.persoana.angajat.Asistent;
@@ -68,7 +69,7 @@ public class ServiciuProgramare {
         Programare pr = new Programare(id, ora, data, m, as, p);
         c.getProgramari().add(pr);
         Path calea = Paths.get("C:\\Users\\Alina\\IdeaProjects\\proiect\\csv_files\\Programari.csv");
-        File file = new File("Programari.csv");
+        File file = new File("C:\\Users\\Alina\\IdeaProjects\\proiect\\csv_files\\Programari.csv");
         try {
             if (!file.exists()) {
                 file.createNewFile();
@@ -108,13 +109,13 @@ public class ServiciuProgramare {
         }
 
         System.out.println("Programarea a fost adauga cu succes!");
-
+        Serviciu.getAudit().actiune("adaugareProgramare");
     }
 
 
-    public static void incarcareProgramari(String fisier){
+    public static void incarcareProgramari(){
         List<Programare> prog = c.getProgramari();
-        Path calea = Paths.get(fisier);
+        Path calea = Paths.get("C:\\Users\\Alina\\IdeaProjects\\proiect\\csv_files\\Programari.csv");
         try (BufferedReader buff = Files.newBufferedReader(calea, StandardCharsets.US_ASCII))
         {
             String rand = buff.readLine();
