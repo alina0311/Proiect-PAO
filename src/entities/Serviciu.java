@@ -195,7 +195,7 @@ public class Serviciu {
     }
 
     public void afisareMeniuAngajat(){
-        cp.incarcareProgramari("Programari.csv");
+        cp.incarcareProgramari("C:\\Users\\Alina\\IdeaProjects\\proiect\\csv_files\\Programari.csv");
         cd.incarcareDocumente();
 
 
@@ -229,7 +229,7 @@ public class Serviciu {
     }
 
     public void afisareMeniuClient(String username){
-        cp.incarcareProgramari("Programari.csv");
+        cp.incarcareProgramari("C:\\Users\\Alina\\IdeaProjects\\proiect\\csv_files\\Programari.csv");
         cd.incarcareDocumente();
 
 
@@ -260,7 +260,7 @@ public class Serviciu {
     }
 
     public void afisareServicii(){
-        cp.incarcareProgramari("Programari.csv");
+        cp.incarcareProgramari("C:\\Users\\Alina\\IdeaProjects\\proiect\\csv_files\\Programari.csv");
         cd.incarcareDocumente();
 
 

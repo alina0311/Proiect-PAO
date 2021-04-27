@@ -67,13 +67,13 @@ public class ServiciuProgramare {
 
         Programare pr = new Programare(id, ora, data, m, as, p);
         c.getProgramari().add(pr);
-        Path calea = Paths.get("Programari.csv");
+        Path calea = Paths.get("C:\\Users\\Alina\\IdeaProjects\\proiect\\csv_files\\Programari.csv");
         File file = new File("Programari.csv");
         try {
             if (!file.exists()) {
                 file.createNewFile();
             }
-            FileWriter csvWriter = new FileWriter("Programari.csv", true);
+            FileWriter csvWriter = new FileWriter("C:\\Users\\Alina\\IdeaProjects\\proiect\\csv_files\\Programari.csv", true);
 
             if (file.length() == 0) {
                 csvWriter.append("ID");

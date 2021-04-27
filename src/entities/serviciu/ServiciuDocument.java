@@ -71,7 +71,7 @@ public class ServiciuDocument {
 
         Programare pr = new Programare(id, ora, data, m, as, p);
         c.getProgramari().add(pr);
-        Path calea = Paths.get("Programari.csv");
+        Path calea = Paths.get("C:\\Users\\Alina\\IdeaProjects\\proiect\\csv_files");
         File file = new File("Programari.csv");
         try {
             if (!file.exists()) {
@@ -163,13 +163,12 @@ public class ServiciuDocument {
             AdeverintaConcediu d = new AdeverintaConcediu(id, str, m, p, zile, data);
             c.getDocumente().add(d);
 
-            Path calea = Paths.get("AdeverinteConcediu.csv");
-            File file = new File("AdeverinteConcediu.csv");
+            File file = new File("C:\\Users\\Alina\\IdeaProjects\\proiect\\csv_files\\AdeverinteConcediu.csv");
             try {
                 if (!file.exists()) {
                     file.createNewFile();
                 }
-                FileWriter csvWriter = new FileWriter("AdeverinteConcediu.csv", true);
+                FileWriter csvWriter = new FileWriter("C:\\Users\\Alina\\IdeaProjects\\proiect\\csv_files\\AdeverinteConcediu.csv", true);
 
                 if (file.length() == 0) {
                     csvWriter.append("ID");
@@ -218,13 +217,12 @@ public class ServiciuDocument {
             AdeverintaMedicala d = new AdeverintaMedicala(id, str, m, p, scop, apt);
             c.getDocumente().add(d);
 
-            Path calea = Paths.get("AdeverinteMedicale.csv");
-            File file = new File("AdeverinteMedicale.csv");
+            File file = new File("C:\\Users\\Alina\\IdeaProjects\\proiect\\csv_files\\AdeverinteMedicale.csv");
             try {
                 if (!file.exists()) {
                     file.createNewFile();
                 }
-                FileWriter csvWriter = new FileWriter("AdeverinteMedicale.csv", true);
+                FileWriter csvWriter = new FileWriter("C:\\Users\\Alina\\IdeaProjects\\proiect\\csv_files\\AdeverinteMedicale.csv", true);
 
                 if (file.length() == 0) {
                     csvWriter.append("ID");
@@ -274,13 +272,12 @@ public class ServiciuDocument {
             TrimitereMedicala d = new TrimitereMedicala(id, str, m, p, scop, data, catre);
             c.getDocumente().add(d);
 
-            Path calea = Paths.get("TrimiteriMedicale.csv");
-            File file = new File("TrimiteriMedicale.csv");
+            File file = new File("C:\\Users\\Alina\\IdeaProjects\\proiect\\csv_files\\TrimiteriMedicale.csv");
             try {
                 if (!file.exists()) {
                     file.createNewFile();
                 }
-                FileWriter csvWriter = new FileWriter("TrimiteriMedicale.csv", true);
+                FileWriter csvWriter = new FileWriter("C:\\Users\\Alina\\IdeaProjects\\proiect\\csv_files\\TrimiteriMedicale.csv", true);
 
                 if (file.length() == 0) {
                     csvWriter.append("ID");
@@ -338,13 +335,12 @@ public class ServiciuDocument {
             Reteta d = new Reteta(id, str, m, p, r);
             c.getDocumente().add(d);
 
-            Path calea = Paths.get("Retete.csv");
             File file = new File("Retete.csv");
             try {
                 if (!file.exists()) {
                     file.createNewFile();
                 }
-                FileWriter csvWriter = new FileWriter("Retete.csv", true);
+                FileWriter csvWriter = new FileWriter("C:\\Users\\Alina\\IdeaProjects\\proiect\\csv_files\\Retete.csv", true);
 
                 if (file.length() == 0) {
                     csvWriter.append("ID");
@@ -393,7 +389,7 @@ public class ServiciuDocument {
     public static void incarcareDocumente(){
 
         List<Document> doc = c.getDocumente();
-        Path calea = Paths.get("AdeverinteConcediu.csv");
+        Path calea = Paths.get("C:\\Users\\Alina\\IdeaProjects\\proiect\\csv_files\\AdeverinteConcediu.csv");
         try (BufferedReader buff = Files.newBufferedReader(calea, StandardCharsets.US_ASCII))
         {
             String rand = buff.readLine();
@@ -445,7 +441,7 @@ public class ServiciuDocument {
 
         c.setDocumente(doc);
 
-        calea = Paths.get("AdeverinteMedicale.csv");
+        calea = Paths.get("C:\\Users\\Alina\\IdeaProjects\\proiect\\csv_files\\AdeverinteMedicale.csv");
         try (BufferedReader buff = Files.newBufferedReader(calea, StandardCharsets.US_ASCII))
         {
             String rand = buff.readLine();
@@ -497,7 +493,7 @@ public class ServiciuDocument {
 
         c.setDocumente(doc);
 
-        calea = Paths.get("Retete.csv");
+        calea = Paths.get("C:\\Users\\Alina\\IdeaProjects\\proiect\\csv_files\\Retete.csv");
         try (BufferedReader buff = Files.newBufferedReader(calea, StandardCharsets.US_ASCII))
         {
             String rand = buff.readLine();
@@ -563,7 +559,7 @@ public class ServiciuDocument {
         c.setDocumente(doc);
 
 
-        calea = Paths.get("TrimiteriMedicale.csv");
+        calea = Paths.get("C:\\Users\\Alina\\IdeaProjects\\proiect\\csv_files\\TrimiteriMedicale.csv");
         try (BufferedReader buff = Files.newBufferedReader(calea, StandardCharsets.US_ASCII))
         {
             String rand = buff.readLine();
