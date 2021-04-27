@@ -1,0 +1,4 @@
+ID,Username,Email,Parola,Nume,Prenume,CNP,DataNasterii,Gen,Adresa,Telefon,Afectiuni
+5,andreea,andreea@yahoo.com,123,Popa,Andreea,6001103492019,09/11/2000,true,str mica,0756399211,0
+9,mihaela,mihaela@gmail.com,123,Popa,Mihaela,6001103492019,04/03/2000,true,str,0757200302,0
+9,kevin,kevin@yahoo.com,123,John,Kevin,6001103492019,04/11/1989,false,str,0757200302,0

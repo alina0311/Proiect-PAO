@@ -9,6 +9,7 @@ public abstract class Angajat extends User implements Comparable<User> {
     protected String dataAngajarii;
     protected float salariu;
     private Specializare specializare;
+    private static int nrAngajati;
 
     public Angajat() {
         dataAngajarii = "";
@@ -23,6 +24,7 @@ public abstract class Angajat extends User implements Comparable<User> {
         this.dataAngajarii = dataAngajarii;
         this.salariu = salariu;
         this.specializare = specializare;
+        nrAngajati++;
     }
 
 
@@ -71,5 +73,13 @@ public abstract class Angajat extends User implements Comparable<User> {
 
     public void setSalariu(float salariu) {
         this.salariu = salariu;
+    }
+
+    public static int getNrAngajati() {
+        return nrAngajati;
+    }
+
+    public static void setNrAngajati(int nrAngajati) {
+        Angajat.nrAngajati = nrAngajati;
     }
 }

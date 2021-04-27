@@ -10,6 +10,7 @@ import entities.persoana.Pacient;
 import entities.persoana.angajat.Asistent;
 import entities.persoana.angajat.Medic;
 import entities.persoana.angajat.Specializare;
+import entities.serviciu.ServiciuUser;
 
 import java.util.*;
 
@@ -19,6 +20,7 @@ public class Main {
     public static void main(String[] args) {
 
         Serviciu s = new Serviciu();
+
 
         Afectiune af = new Afectiune(1, "03/12/2009", "Diabet");
         Afectiune al = new Afectiune(2, "03/12/2005", "Raceala");
@@ -75,7 +77,12 @@ public class Main {
         //s.afisareMeniuAngajat();
         //admin: username: admin, parola: admin1234
 
+//        ServiciuUser cu = ServiciuUser.getCP();
+//        cu.incarcarePacienti();
+
 
 
     }
 }
+//6001103492019
+//0757200302

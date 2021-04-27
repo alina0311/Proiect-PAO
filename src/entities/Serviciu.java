@@ -7,6 +7,7 @@ import entities.persoana.angajat.Asistent;
 import entities.persoana.angajat.Medic;
 import entities.serviciu.ServiciuDocument;
 import entities.serviciu.ServiciuProgramare;
+import entities.serviciu.ServiciuUser;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -14,15 +15,17 @@ import java.util.*;
 
 public class Serviciu {
     static CabinetMedical c = CabinetMedical.getCabinet();
-    ServiciuProgramare cp = ServiciuProgramare.getCP();
-    ServiciuDocument cd = ServiciuDocument.getCP();
+    static ServiciuProgramare cp = ServiciuProgramare.getCP();
+    static ServiciuDocument cd = ServiciuDocument.getCP();
+    static ServiciuUser cu = ServiciuUser.getCP();
 
     public Serviciu(){
 
     }
 
     public void afisareLogin(){
-
+        cu.incarcarePacienti();
+        cu.incarcareAngajati();
         System.out.println("\t\t ------------- LOGIN -------------");
         System.out.println("\t\t Alegeti cu ce cont va conectati:");
         System.out.println("\t\t 1. Angajat.");
@@ -44,7 +47,8 @@ public class Serviciu {
         }
 
         if(opt == 4){
-            adaugaClient();
+            cu.adaugaClient();
+            loginClient();
         }
 
     }
@@ -62,52 +66,7 @@ public class Serviciu {
         c.documente.add(p);
     }
 
-    public void adaugaClient(){
-        System.out.println("Indroduceti un username: ");
-        Scanner scanner = new Scanner(System.in);
-        String username = scanner.nextLine();
 
-        System.out.println("Indroduceti adresa de email: ");
-        String email = scanner.nextLine();
-
-        System.out.println("Indroduceti o parola: ");
-        String password = scanner.nextLine();
-
-        System.out.println("Indroduceti 0 pentru Masculin, 1 pentru Feminin: ");
-        int b = scanner.nextInt();
-        String newl = scanner.nextLine();
-
-        System.out.println("Indroduceti numele de familie: ");
-        String nume = scanner.nextLine();
-
-        System.out.println("Indroduceti prenumele: ");
-        String prenume = scanner.nextLine();
-
-        System.out.println("Indroduceti CNP: ");
-        String cnp = scanner.nextLine();
-
-        System.out.println("Indroduceti data nasterii: ");
-        String data = scanner.nextLine();
-
-        System.out.println("Indroduceti adresa: ");
-        String adresa = scanner.nextLine();
-
-        System.out.println("Indroduceti numarul de telefon: ");
-        String telefon = scanner.nextLine();
-
-        int id = Pacient.getNrPacienti() + 1;
-
-        boolean gen;
-        if(b == 0) gen = false;
-        else gen = true;
-
-        Pacient pa = new Pacient(id, username, email, password, nume, prenume, cnp, data, gen, adresa, telefon, null);
-        c.pacienti.add(pa);
-
-        System.out.println("Cont creat cu succes!");
-        loginClient();
-
-    }
 
     public void loginAngajat(){
 
@@ -140,8 +99,9 @@ public class Serviciu {
 
     }
 
-    public void loginClient(){
+    public static void loginClient(){
         int ok = 0;
+        //cu.incarcarePacienti();
         while(ok == 0){
 
             System.out.println("\t Introdu username-ul: ");
@@ -197,7 +157,8 @@ public class Serviciu {
     public void afisareMeniuAngajat(){
         cp.incarcareProgramari("C:\\Users\\Alina\\IdeaProjects\\proiect\\csv_files\\Programari.csv");
         cd.incarcareDocumente();
-
+        cu.incarcarePacienti();
+        cu.incarcareAngajati();
 
         int opt = 0;
         while(opt != 9) {
@@ -228,10 +189,11 @@ public class Serviciu {
         }
     }
 
-    public void afisareMeniuClient(String username){
+    public static void afisareMeniuClient(String username){
         cp.incarcareProgramari("C:\\Users\\Alina\\IdeaProjects\\proiect\\csv_files\\Programari.csv");
         cd.incarcareDocumente();
-
+        cu.incarcarePacienti();
+        cu.incarcareAngajati();
 
         int opt = 0;
         while(opt != 7) {
@@ -262,10 +224,11 @@ public class Serviciu {
     public void afisareServicii(){
         cp.incarcareProgramari("C:\\Users\\Alina\\IdeaProjects\\proiect\\csv_files\\Programari.csv");
         cd.incarcareDocumente();
-
+        cu.incarcarePacienti();
+        cu.incarcareAngajati();
 
         int opt = 0;
-        while(opt != 10) {
+        while(opt != 11) {
             System.out.println("\n\t-------------------------------------------\n");
             System.out.println("\t\t MENIU:\n");
             System.out.println("\t Alegeti dintre urmatoarele optiuni:");
@@ -278,7 +241,8 @@ public class Serviciu {
             System.out.println("\t 7. Calculeaza venit angajat.");
             System.out.println("\t 8. Afiseaza documente.");
             System.out.println("\t 9. Sterge document.");
-            System.out.println("\t 7. Exit.\n");
+            System.out.println("\t 10. Adauga angajat.");
+            System.out.println("\t 11. Exit.\n");
 
             Scanner scanner = new Scanner(System.in);
             opt = scanner.nextInt();
@@ -292,10 +256,11 @@ public class Serviciu {
             if (opt == 7) calcuVenit();
             if (opt == 8) afisareDocumente("permis");
             if (opt == 9) stergeDocument();
+            if (opt == 10) cu.adaugaAngajat();
         }
     }
 
-    public void afisareMedici(){
+    public static void afisareMedici(){
         System.out.println("Cabinetul medical are " + Medic.getNrMedici() + " medici: ");
 
         for (Angajat m : c.angajati){
@@ -305,7 +270,7 @@ public class Serviciu {
         }
     }
 
-    public void afisareAsistenti(){
+    public static void afisareAsistenti(){
         System.out.println("\nCabinetul medical are " + Asistent.getNrAsistenti() + " asistenti: ");
 
         for (Angajat m : c.angajati){
@@ -316,8 +281,8 @@ public class Serviciu {
         }
     }
 
-    public void afisareAngajati(){
-
+    public static void afisareAngajati(){
+        cu.incarcareAngajati();
         System.out.println("\t Introdu:");
         System.out.println("\t 1 pentru a afisa toti asistentii");
         System.out.println("\t 2 pentru a afisa toti medicii");
@@ -448,7 +413,7 @@ public class Serviciu {
 
 
 
-    public void stergeProgramare(String username){
+    public static void stergeProgramare(String username){
         int ok = 0;
 
         System.out.println("\t Introduceti CNP-ul pacientului: ");
@@ -476,7 +441,7 @@ public class Serviciu {
         }
     }
 
-    public void afisareDocumente(String username){
+    public static void afisareDocumente(String username){
         if(username.equals("permis")){
             System.out.println("Cabinetul medical are in registrul urmatoarele documente: ");
 
@@ -539,7 +504,7 @@ public class Serviciu {
         System.out.println("Venitul este: " + v);
     }
 
-    public void calculValabilitate(String username){
+    public static void calculValabilitate(String username){
 
         System.out.println("\t Introduceti id-ul documentului: ");
         Scanner scanner = new Scanner(System.in);
