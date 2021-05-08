@@ -1,0 +1,6 @@
+ID,Username,Email,Parola,Nume,Prenume,CNP,DataNasterii,Gen,Adresa,Telefon,DataAngajarii,Salariu,Specializare,LucruInTure
+5,mir,mir@gmail.com,123,Tes,Mirolena,6001103492019,20/12/2000,true,str,0757200302,03/02/2021,3500.0,GENETICA,1
+6,PAM,pam@gmail.com,123,Grigore,Pamela,6001103492019,04/01/2000,true,str,0757200302,20/01/1999,4005.0,GENETICA,1
+23,oana,oana@gmail.com,123,Lautaru,Oana,6001103492019,14/10/2000,true,str,0757200302,06/03/2003,5806.0,HEMATOLOGIE,1
+11,bmadalina,badescu@yahoo.com,123,Badescu,Madalina,2352355554212,07/05/2000,true,str,0768100290,03/06/2019,4632,MEDICINAMUNCII,1
+13,matei,mandruleanu@yahoo.com,123,Mandruleanu,Matei,2352355554212,16/07/2000,true,str,0734670010,27/08/2020,4352,DIABET,1

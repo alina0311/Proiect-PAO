@@ -83,12 +83,12 @@ public class ServiciuUser {
         Pacient pa = new Pacient(id, username, email, password, nume, prenume, cnp, data, gen, adresa, telefon, null);
         c.getPacienti().add(pa);
 
-        File file = new File("C:\\Users\\Alina\\IdeaProjects\\proiect\\csv_files\\Pacienti.csv");
+        File file = new File("src/csv_files/Pacienti.csv");
         try {
             if (!file.exists()) {
                 file.createNewFile();
             }
-            FileWriter csvWriter = new FileWriter("C:\\Users\\Alina\\IdeaProjects\\proiect\\csv_files\\Pacienti.csv", true);
+            FileWriter csvWriter = new FileWriter("src/csv_files/Pacienti.csv", true);
 
             if (file.length() == 0) {
                 csvWriter.append("ID");
@@ -212,13 +212,13 @@ public class ServiciuUser {
             Medic m = new Medic(id, username, email, password, nume, prenume, cnp, data, gen, adresa, telefon, dataAngajarii, salariu, value, parafa, treapta);
             c.getAngajati().add(m);
 
-            Path calea = Paths.get("C:\\Users\\Alina\\IdeaProjects\\proiect\\csv_files\\Medici.csv");
-            File file = new File("C:\\Users\\Alina\\IdeaProjects\\proiect\\csv_files\\Medici.csv");
+            Path calea = Paths.get("src/csv_files/Medici.csv");
+            File file = new File("src/csv_files/Medici.csv");
             try {
                 if (!file.exists()) {
                     file.createNewFile();
                 }
-                FileWriter csvWriter = new FileWriter("C:\\Users\\Alina\\IdeaProjects\\proiect\\csv_files\\Medici.csv", true);
+                FileWriter csvWriter = new FileWriter("src/csv_files/Medici.csv", true);
 
                 if (file.length() == 0) {
                     csvWriter.append("ID");
@@ -287,13 +287,13 @@ public class ServiciuUser {
             Asistent a = new Asistent(id, username, email, password, nume, prenume, cnp, data, gen, adresa, telefon, dataAngajarii, salariu, value, lucruTure);
             c.getAngajati().add(a);
 
-            Path calea = Paths.get("C:\\Users\\Alina\\IdeaProjects\\proiect\\csv_files\\Asistenti.csv");
-            File file = new File("C:\\Users\\Alina\\IdeaProjects\\proiect\\csv_files\\Asistenti.csv");
+            Path calea = Paths.get("src/csv_files/Asistenti.csv");
+            File file = new File("src/csv_files/Asistenti.csv");
             try {
                 if (!file.exists()) {
                     file.createNewFile();
                 }
-                FileWriter csvWriter = new FileWriter("C:\\Users\\Alina\\IdeaProjects\\proiect\\csv_files\\Asistenti.csv", true);
+                FileWriter csvWriter = new FileWriter("src/csv_files/Asistenti.csv", true);
 
                 if (file.length() == 0) {
                     csvWriter.append("ID");
@@ -358,7 +358,7 @@ public class ServiciuUser {
     public static void incarcareAngajati(){
 
         List<Angajat> ang = c.getAngajati();
-        Path calea = Paths.get("C:\\Users\\Alina\\IdeaProjects\\proiect\\csv_files\\Medici.csv");
+        Path calea = Paths.get("src/csv_files/Medici.csv");
         try (BufferedReader buff = Files.newBufferedReader(calea, StandardCharsets.US_ASCII))
         {
             String rand = buff.readLine();
@@ -403,7 +403,7 @@ public class ServiciuUser {
 //            System.out.println(a);
 //        }
 
-        calea = Paths.get("C:\\Users\\Alina\\IdeaProjects\\proiect\\csv_files\\Asistenti.csv");
+        calea = Paths.get("src/csv_files/Asistenti.csv");
         try (BufferedReader buff = Files.newBufferedReader(calea, StandardCharsets.US_ASCII))
         {
             String rand = buff.readLine();
@@ -448,7 +448,7 @@ public class ServiciuUser {
     public static void incarcarePacienti(){
 
         List<Pacient> pac = c.getPacienti();
-        Path calea = Paths.get("C:\\Users\\Alina\\IdeaProjects\\proiect\\csv_files\\Pacienti.csv");
+        Path calea = Paths.get("src/csv_files/Pacienti.csv");
         try (BufferedReader buff = Files.newBufferedReader(calea, StandardCharsets.US_ASCII))
         {
             String rand = buff.readLine();

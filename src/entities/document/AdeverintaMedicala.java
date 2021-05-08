@@ -65,4 +65,5 @@ public class AdeverintaMedicala extends Document{
     public void setApt(boolean apt) {
         this.apt = apt;
     }
+
 }

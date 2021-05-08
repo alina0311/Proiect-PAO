@@ -10,9 +10,10 @@ import entities.serviciu.ServiciuDocument;
 import entities.serviciu.ServiciuProgramare;
 import entities.serviciu.ServiciuUser;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import java.io.IOException;
 import java.util.*;
+
+import static entities.serviciu.ServiciuDocument.incarcareDocumente;
 
 public class Serviciu {
     static CabinetMedical c = CabinetMedical.getCabinet();
@@ -158,10 +159,41 @@ public class Serviciu {
             }
         }
     }
+    public static void incarcareToateDoc(){
+        ArrayList<AdeverintaMedicala> admed = null;
+        try {
+            admed = incarcareDocumente("ADEVERINTA MEDICALA", "src/csv_files/AdeverinteMedicale.csv");
+        } catch (IOException e) { e.printStackTrace(); }
+
+        ArrayList<AdeverintaConcediu> adcon = null;
+        try {
+            adcon = incarcareDocumente("ADEVERINTA CONCEDIU", "src/csv_files/AdeverinteConcediu.csv");
+        } catch (IOException e) { e.printStackTrace(); }
+
+        ArrayList<Reteta> ret = null;
+        try {
+            ret = incarcareDocumente("RETETA", "src/csv_files/Retete.csv");
+        } catch (IOException e) { e.printStackTrace(); }
+
+        ArrayList<TrimitereMedicala> trim = null;
+        try {
+            trim = incarcareDocumente("TRIMITERE MEDICALA", "src/csv_files/TrimiteriMedicale.csv");
+        } catch (IOException e) { e.printStackTrace(); }
+
+        List<Document> doc = c.getDocumente();
+        doc.addAll(admed);
+        doc.addAll(adcon);
+        doc.addAll(ret);
+        doc.addAll(trim);
+    }
 
     public void afisareMeniuAngajat(){
         cp.incarcareProgramari();
-        cd.incarcareDocumente();
+        incarcareToateDoc();
+
+
+
+
         cu.incarcarePacienti();
         cu.incarcareAngajati();
 
@@ -194,9 +226,11 @@ public class Serviciu {
         }
     }
 
+
+
     public static void afisareMeniuClient(String username){
         cp.incarcareProgramari();
-        cd.incarcareDocumente();
+        incarcareToateDoc();
         cu.incarcarePacienti();
         cu.incarcareAngajati();
 
@@ -228,7 +262,7 @@ public class Serviciu {
 
     public void afisareServicii(){
         cp.incarcareProgramari();
-        cd.incarcareDocumente();
+        incarcareToateDoc();
         cu.incarcarePacienti();
         cu.incarcareAngajati();
 

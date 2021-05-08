@@ -68,13 +68,13 @@ public class ServiciuProgramare {
 
         Programare pr = new Programare(id, ora, data, m, as, p);
         c.getProgramari().add(pr);
-        Path calea = Paths.get("C:\\Users\\Alina\\IdeaProjects\\proiect\\csv_files\\Programari.csv");
-        File file = new File("C:\\Users\\Alina\\IdeaProjects\\proiect\\csv_files\\Programari.csv");
+        Path calea = Paths.get("src/csv_files/Programari.csv");
+        File file = new File("src/csv_files/Programari.csv");
         try {
             if (!file.exists()) {
                 file.createNewFile();
             }
-            FileWriter csvWriter = new FileWriter("C:\\Users\\Alina\\IdeaProjects\\proiect\\csv_files\\Programari.csv", true);
+            FileWriter csvWriter = new FileWriter("src/csv_files/Programari.csv", true);
 
             if (file.length() == 0) {
                 csvWriter.append("ID");
@@ -113,9 +113,10 @@ public class ServiciuProgramare {
     }
 
 
+
     public static void incarcareProgramari(){
         List<Programare> prog = c.getProgramari();
-        Path calea = Paths.get("C:\\Users\\Alina\\IdeaProjects\\proiect\\csv_files\\Programari.csv");
+        Path calea = Paths.get("src/csv_files/Programari.csv");
         try (BufferedReader buff = Files.newBufferedReader(calea, StandardCharsets.US_ASCII))
         {
             String rand = buff.readLine();

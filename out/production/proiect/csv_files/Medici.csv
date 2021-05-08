@@ -1,0 +1,6 @@
+ID,Username,Email,Parola,Nume,Prenume,CNP,DataNasterii,Gen,Adresa,Telefon,DataAngajarii,Salariu,Specializare,Parafa,Treapta
+7,bogdan,bogdan@gmail.com,123,Crai,Bogdan,6001103492019,03/04/2021,false,str,0757200302,03/03/1999,7000.0,GENETICA,12,1
+14,andreea,andreea@gmail.com,123,Florean,Andreea,6001103492019,31/10/1994,true,str,0757200302,04/09/2019,6000.0,GENETICA,123,3
+10,mihailescu,mihailescu@yahoo.com,123,Mihailescu,Georgeta,5001231350051,28/02/1998,true,str,0768100234,03/06/2019,9320,HEMATOLOGIE,2,4
+12,cris,serafim@yahoo.com,123,Serafim,Crisotfer,5001901350051,08/12/1991,true,str,0768100290,03/06/2019,2343,OFTALMOLOGIE,1,3
+28,kevin,kevin@email.com,123,Tica,Kevin,6001103928412,07/11/1979,false,str,0757303242,04/04/2009,4359.0,CARDIOLOGIE,13,2
