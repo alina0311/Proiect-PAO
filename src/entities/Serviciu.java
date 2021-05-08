@@ -338,7 +338,7 @@ public class Serviciu {
         else
             while(opt != 1 && opt != 2 && opt != 3)
                 System.out.println("Introduceti o optiune valida! (1, 2, 3).");
-
+        audit.actiune("afisareAngajati");
 
     }
 
@@ -352,7 +352,7 @@ public class Serviciu {
         for (Programare p : c.getProgramari())
             if(p.getDataProgramare().equals(data))
             { System.out.println(p.toString()); }
-
+        audit.actiune("afisareProgramari");
     }
 
 
@@ -499,6 +499,7 @@ public class Serviciu {
                 }
             }
         }
+        audit.actiune("afisareDocumente");
     }
 
     public void stergeDocument(){

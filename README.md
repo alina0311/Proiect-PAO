@@ -62,3 +62,13 @@ Cerinte:
 - 🔵 stergerea unui angajat;
 - 🔵 stergerea unui pacient;
 - 🔵 calculul venitului unui angajat in functie de rolul sau: pentru medici se ia in considerare treaapta profesionala, iar pentru asistenti daca lucreaza sau nu in ture;
+
+
+---
+## Partea II:
+Cerinte:
+- [x] realizarea de fișiere de tip CSV pentru cel puțin 4 dintre clasele definite în prima etapa 
+- [x] realizarea de servicii singleton generice pentru scrierea și citirea din fișiere
+- [x] încărcarea datelor din fișiere utilizând serviciile create
+- [x] realizarea unui serviciu care sa scrie într-un fișier de tip CSV de fiecare data când este executată una dintre acțiunile descrise în prima etapa
+- [x] cel puțin o clasă serviciu care sa expună operațiile sistemului
