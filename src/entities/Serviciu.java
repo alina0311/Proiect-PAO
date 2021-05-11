@@ -300,7 +300,7 @@ public class Serviciu {
     }
 
     public static void afisareMedici(){
-        System.out.println("Cabinetul medical are " + Medic.getNrMedici() + " medici: ");
+        System.out.println("Cabinetul medical are urmatorii medici: ");
 
         for (Angajat m : c.angajati){
             if(m instanceof Medic){
@@ -310,7 +310,7 @@ public class Serviciu {
     }
 
     public static void afisareAsistenti(){
-        System.out.println("\nCabinetul medical are " + Asistent.getNrAsistenti() + " asistenti: ");
+        System.out.println("\nCabinetul medical are urmatorii asistenti: ");
 
         for (Angajat m : c.angajati){
             if(m instanceof Asistent){

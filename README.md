@@ -72,3 +72,10 @@ Cerinte:
 - [x] încărcarea datelor din fișiere utilizând serviciile create
 - [x] realizarea unui serviciu care sa scrie într-un fișier de tip CSV de fiecare data când este executată una dintre acțiunile descrise în prima etapa
 - [x] cel puțin o clasă serviciu care sa expună operațiile sistemului
+
+Implementare:
+- 🟣 am creat fisiere csv pentru fiecare clasa mentionata mai sus
+- 🟣 clasa singleton **ServiciuDocument** cu metodele generice *scriecsv* si *incarcareDocumente* pentru a scrie si citi din csv, tratand cele 4 cazuri in functie de cele 4 clase derivate
+- 🟣 clasa singleton **ServiciuProgramare** cu metodele *adaugaProgramare* si *incarcareProgramari*
+- 🟣 clasa singleton **ServiciuUser** cu metodele *adaugaClient*, *adaugaAngajat*, *incarcareAngajati* si *incarcarePacienti*
+- 🟣 clasa singleton **Audit** cu metoda *actiune*

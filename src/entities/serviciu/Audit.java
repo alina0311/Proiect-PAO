@@ -34,7 +34,7 @@ public class Audit {
     }
 
     public void actiune(String action){
-        System.out.println("in act");
+        //System.out.println("in act");
         Path calea = Paths.get("src/csv_files/Audit.csv");
         File file = new File("src/csv_files/Audit.csv");
         try {
