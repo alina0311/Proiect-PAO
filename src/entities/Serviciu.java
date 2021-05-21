@@ -11,6 +11,9 @@ import entities.serviciu.ServiciuProgramare;
 import entities.serviciu.ServiciuUser;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.*;
 
 import static entities.serviciu.ServiciuDocument.incarcareDocumente;
@@ -21,6 +24,11 @@ public class Serviciu {
     static ServiciuDocument cd = ServiciuDocument.getCP();
     static ServiciuUser cu = ServiciuUser.getCP();
     static Audit audit = Audit.getCP();
+
+    private String connectionURL = "jdbc:sqlserver://pao-project.database.windows.net:1433;database=PAO-db;user=anca@pao-project;password=qwer1234!@#$;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
+    private Connection connection;
+
+
 
     public Serviciu(){
 
@@ -218,10 +226,17 @@ public class Serviciu {
             if (opt == 1) afisareAngajati();
             if (opt == 2) afisarePacienti();
             if (opt == 3) afisareProgramari();
-            if (opt == 4) afisareDocumente("permis");
+            if (opt == 4) //afisareDocumente("permis");
+            {
+                cd.afisareDocumenteDB();
+            }
+
             if (opt == 5) calculValabilitate("permis");
             if (opt == 6) stergeProgramare("permis");
-            if (opt == 7) cd.elibereazaDocument();
+            if (opt == 7) //cd.elibereazaDocument();
+            {
+                //cd.adaugaDocumentDB();
+            }
             if (opt == 8) stergeDocument();
         }
     }

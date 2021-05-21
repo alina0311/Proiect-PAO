@@ -4,3 +4,4 @@ ID,Username,Email,Parola,Nume,Prenume,CNP,DataNasterii,Gen,Adresa,Telefon,DataAn
 23,oana,oana@gmail.com,123,Lautaru,Oana,6001103492019,14/10/2000,true,str,0757200302,06/03/2003,5806.0,HEMATOLOGIE,1
 11,bmadalina,badescu@yahoo.com,123,Badescu,Madalina,2352355554212,07/05/2000,true,str,0768100290,03/06/2019,4632,MEDICINAMUNCII,1
 13,matei,mandruleanu@yahoo.com,123,Mandruleanu,Matei,2352355554212,16/07/2000,true,str,0734670010,27/08/2020,4352,DIABET,1
+31,alina01,alina@gmail.com,123,Dorneanu,Alina,6001103929411,03/11/2000,true,str,0757200302,03/04/1999,2439.0,DIABET,1
