@@ -160,6 +160,7 @@ public class ServiciuDocument {
             preparedStmt.setString(1, medicam);
             preparedStmt.setInt(2, id);
             preparedStmt.executeUpdate();
+            //ok
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
