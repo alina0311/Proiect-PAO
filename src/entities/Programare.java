@@ -48,7 +48,6 @@ public class Programare {
         this.dataProgramare = dataProgramare;
     }
 
-
     public Medic getMedic() {
         return medic;
     }

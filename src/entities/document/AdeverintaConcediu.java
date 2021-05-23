@@ -23,7 +23,6 @@ public class AdeverintaConcediu extends Document{
     @Override
     public void afiseaza() {}
 
-
     @Override
     public String toString() {
         return super.toString() + "Adeverinta pentru concediu medical a fost eliberata pentru " + zileConcediu + " zile, incepand cu data de: "
@@ -32,9 +31,15 @@ public class AdeverintaConcediu extends Document{
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof AdeverintaConcediu)) return false;
-        if (!super.equals(o)) return false;
+        if (this == o){
+            return true;
+        }
+        if (!(o instanceof AdeverintaConcediu)){
+            return false;
+        }
+        if (!super.equals(o)){
+            return false;
+        }
         AdeverintaConcediu that = (AdeverintaConcediu) o;
         return zileConcediu == that.zileConcediu && Objects.equals(dataInceput, that.dataInceput);
     }

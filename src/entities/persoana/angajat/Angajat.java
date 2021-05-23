@@ -1,7 +1,6 @@
 package entities.persoana.angajat;
 
 import entities.persoana.User;
-
 import java.util.Objects;
 import java.util.regex.PatternSyntaxException;
 
@@ -37,9 +36,15 @@ public abstract class Angajat extends User implements Comparable<User> {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Angajat)) return false;
-        if (!super.equals(o)) return false;
+        if (this == o){
+            return true;
+        }
+        if (!(o instanceof Angajat)){
+            return false;
+        }
+        if (!super.equals(o)){
+            return false;
+        }
         Angajat angajat = (Angajat) o;
         return Float.compare(angajat.salariu, salariu) == 0 && Objects.equals(dataAngajarii, angajat.dataAngajarii) && specializare == angajat.specializare;
     }

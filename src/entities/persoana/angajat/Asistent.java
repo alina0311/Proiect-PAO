@@ -38,9 +38,15 @@ public class Asistent extends Angajat{
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Asistent)) return false;
-        if (!super.equals(o)) return false;
+        if (this == o){
+            return true;
+        }
+        if (!(o instanceof Asistent)) {
+            return false;
+        }
+        if (!super.equals(o)){
+            return false;
+        }
         Asistent asistent = (Asistent) o;
         return lucruInTure == asistent.lucruInTure && treapta == asistent.treapta;
     }
@@ -53,7 +59,6 @@ public class Asistent extends Angajat{
     public static int getNrAsistenti() {
         return nrAsistenti;
     }
-
 
     public boolean isLucruInTure() {
         return lucruInTure;

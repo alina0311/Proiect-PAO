@@ -39,8 +39,12 @@ public abstract class Document{
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Document)) return false;
+        if (this == o){
+            return true;
+        }
+        if (!(o instanceof Document)){
+            return false;
+        }
         Document document = (Document) o;
         return Objects.equals(docId, document.docId) && Objects.equals(dataEliberarii, document.dataEliberarii) && Objects.equals(medic, document.medic) && Objects.equals(pacient, document.pacient);
     }
@@ -89,6 +93,5 @@ public abstract class Document{
     public static void setNrDocumente(int nrDocumente) {
         Document.nrDocumente = nrDocumente;
     }
-
 
 }

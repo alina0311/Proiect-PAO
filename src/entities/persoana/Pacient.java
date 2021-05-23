@@ -2,7 +2,6 @@ package entities.persoana;
 
 import entities.Afectiune;
 import entities.persoana.angajat.Asistent;
-
 import java.util.List;
 import java.util.Objects;
 
@@ -32,9 +31,15 @@ public class Pacient extends User{
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Pacient)) return false;
-        if (!super.equals(o)) return false;
+        if (this == o){
+            return true;
+        }
+        if (!(o instanceof Pacient)){
+            return false;
+        }
+        if (!super.equals(o)){
+            return false;
+        }
         Pacient pacient = (Pacient) o;
         return Objects.equals(afectiuni, pacient.afectiuni);
     }
@@ -59,6 +64,5 @@ public class Pacient extends User{
     public void setAfectiuni(List<Afectiune> afectiuni) {
         this.afectiuni = afectiuni;
     }
-
 
 }

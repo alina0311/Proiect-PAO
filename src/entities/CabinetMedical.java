@@ -38,7 +38,6 @@ public class CabinetMedical {
         return cabinet;
     }
 
-
     public String getNumeCabinet() {
         return numeCabinet;
     }
@@ -70,7 +69,6 @@ public class CabinetMedical {
     public void setOraSfarsit(double oraSfarsit) {
         this.oraSfarsit = oraSfarsit;
     }
-
 
     public String getTelefon() {
         return telefon;

@@ -34,14 +34,13 @@ public class Audit {
     }
 
     public void actiune(String action){
-        //System.out.println("in act");
         Path calea = Paths.get("src/csv_files/Audit.csv");
         File file = new File("src/csv_files/Audit.csv");
         try {
             if (!file.exists()) {
                 file.createNewFile();
             }
-            FileWriter csvWriter = new FileWriter("src/csv_files/Audit.csv", true);
+            FileWriter csvWriter = new FileWriter("src/csv_files/Audit.csv", true); //deschid fisierul
 
             if (file.length() == 0) {
                 csvWriter.append("NumeActiune");
@@ -64,7 +63,6 @@ public class Audit {
         catch(IOException e) {
             e.printStackTrace();
         }
-
 
     }
 

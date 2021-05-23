@@ -20,11 +20,8 @@ public class AdeverintaMedicala extends Document{
         this.apt = apt;
     }
 
-
-
     @Override
     public void afiseaza() {}
-
 
     @Override
     public String toString() {
@@ -38,9 +35,15 @@ public class AdeverintaMedicala extends Document{
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof AdeverintaMedicala)) return false;
-        if (!super.equals(o)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof AdeverintaMedicala)){
+            return false;
+        }
+        if (!super.equals(o)){
+            return false;
+        }
         AdeverintaMedicala that = (AdeverintaMedicala) o;
         return apt == that.apt && Objects.equals(scop, that.scop);
     }
@@ -65,6 +68,5 @@ public class AdeverintaMedicala extends Document{
     public void setApt(boolean apt) {
         this.apt = apt;
     }
-
 
 }

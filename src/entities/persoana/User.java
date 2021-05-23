@@ -59,9 +59,7 @@ public abstract class User {
         return this.CNP.compareTo(p.CNP);
     }
 
-
     abstract public void afiseaza();
-
 
     @Override
     public String toString() {
@@ -85,7 +83,6 @@ public abstract class User {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date today = new Date();
 
-
         Date birth = null;
         try {
             birth = new SimpleDateFormat("dd/MM/yyyy").parse(dataNasterii);
@@ -93,11 +90,7 @@ public abstract class User {
             e.printStackTrace();
         }
 
-
         long diff = Math.abs(today.getTime() - birth.getTime());
-
-        //long diffDays = TimeUnit.DAYS.convert(diff, TimeUnit.DAYS);
-        //System.out.println(diffDays);
         int diffYears = (int) (diff / (1000l * 60 * 60 * 24 * 365));
 
         return diffYears;
@@ -110,8 +103,12 @@ public abstract class User {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof User)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof User)){
+            return false;
+        }
         User persoana = (User) o;
         return gen == persoana.gen && Objects.equals(nume, persoana.nume) && Objects.equals(prenume, persoana.prenume) && Objects.equals(CNP, persoana.CNP) && Objects.equals(dataNasterii, persoana.dataNasterii) && Objects.equals(adresa, persoana.adresa) && Objects.equals(telefon, persoana.telefon);
     }

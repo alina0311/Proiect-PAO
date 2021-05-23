@@ -3,14 +3,11 @@ package entities.persoana.angajat;
 import java.util.Objects;
 import java.util.regex.PatternSyntaxException;
 
-
-
 public class Medic extends Angajat{
     private int parafa;
     private static int nrMedici;
     private static final double sporuri[] = {5, 10, 15, 20, 25};
     private int treapta;
-
 
     public Medic(){
     }
@@ -43,9 +40,15 @@ public class Medic extends Angajat{
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Medic)) return false;
-        if (!super.equals(o)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Medic)){
+            return false;
+        }
+        if (!super.equals(o)){
+            return false;
+        }
         Medic medic = (Medic) o;
         return parafa == medic.parafa && treapta == medic.treapta;
     }

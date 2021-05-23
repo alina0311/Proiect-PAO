@@ -1,7 +1,7 @@
 ID,Username,Email,Parola,Nume,Prenume,CNP,DataNasterii,Gen,Adresa,Telefon,DataAngajarii,Salariu,Specializare,LucruInTure
-5,mir,mir@gmail.com,123,Tes,Mirolena,6001103492019,20/12/2000,true,str,0757200302,03/02/2021,3500.0,GENETICA,1
-6,PAM,pam@gmail.com,123,Grigore,Pamela,6001103492019,04/01/2000,true,str,0757200302,20/01/1999,4005.0,GENETICA,1
-23,oana,oana@gmail.com,123,Lautaru,Oana,6001103492019,14/10/2000,true,str,0757200302,06/03/2003,5806.0,HEMATOLOGIE,1
-11,bmadalina,badescu@yahoo.com,123,Badescu,Madalina,2352355554212,07/05/2000,true,str,0768100290,03/06/2019,4632,MEDICINAMUNCII,1
-13,matei,mandruleanu@yahoo.com,123,Mandruleanu,Matei,2352355554212,16/07/2000,true,str,0734670010,27/08/2020,4352,DIABET,1
-31,alina01,alina@gmail.com,123,Dorneanu,Alina,6001103929411,03/11/2000,true,str,0757200302,03/04/1999,2439.0,DIABET,1
+5,mir,mir@gmail.com,123,Tes,Mirolena,2750520370046,20/05/1975,true,strada Merelor nr 27,0757201459,03/02/2007,3500.0,GENETICA,1
+6,pamela,pam@gmail.com,123,Grigore,Pamela,2910702370080,02/07/1991,true,strada Mihai Eminescu nr 29,0757349192,20/01/1999,4005.0,GENETICA,0
+23,oana,oana@gmail.com,123,Lautaru,Oana,6001103492019,03/11/2000,true,strada Ciresilor nr 129,0757203192,06/03/2020,5806.0,HEMATOLOGIE,1
+11,bmadalina,badescu@yahoo.com,123,Badescu,Madalina,2970208250070,08/02/1997,true,strada Ion Creanga nr 102,0768100290,03/06/2019,4632,MEDICINAMUNCII,1
+13,matei,mandruleanu@yahoo.com,123,Mandruleanu,Matei,1820628230080,16/07/1882,true,strada Arhitectilor nr 23,0734670010,27/08/2020,4352,DIABET,1
+31,alina01,alina@gmail.com,123,Dorneanu,Alina,2760315170089,15/03/1960,true,strada Ambasadei nr 204,0757201924,03/04/2006,2439.0,DIABET,1

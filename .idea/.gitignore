@@ -1,0 +1,12 @@
+# Default ignored files
+.idea/workspace.xml
+.idea/vcs.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/uiDesigner.xml
+
+/out/
+*.iml
+
+
+

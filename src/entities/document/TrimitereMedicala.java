@@ -40,7 +40,8 @@ public class TrimitereMedicala extends Document{
         Date exp = null;
         try {
             exp = new SimpleDateFormat("dd/MM/yyyy").parse(dataExprValabilitate);
-        } catch (ParseException e) {
+        }
+        catch (ParseException e) {
             e.printStackTrace();
         }
 
@@ -64,9 +65,15 @@ public class TrimitereMedicala extends Document{
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof TrimitereMedicala)) return false;
-        if (!super.equals(o)) return false;
+        if (this == o){
+            return true;
+        }
+        if (!(o instanceof TrimitereMedicala)) {
+            return false;
+        }
+        if (!super.equals(o)){
+            return false;
+        }
         TrimitereMedicala that = (TrimitereMedicala) o;
         return Objects.equals(scop, that.scop) && Objects.equals(dataExprValabilitate, that.dataExprValabilitate) && Objects.equals(catreInstutia, that.catreInstutia);
     }
@@ -80,23 +87,12 @@ public class TrimitereMedicala extends Document{
         return scop;
     }
 
-    public void setScop(String scop) {
-        this.scop = scop;
-    }
-
     public String getDataExprValabilitate() {
         return dataExprValabilitate;
-    }
-
-    public void setDataExprValabilitate(String dataExprValabilitate) {
-        this.dataExprValabilitate = dataExprValabilitate;
     }
 
     public String getCatreInstutia() {
         return catreInstutia;
     }
 
-    public void setCatreInstutia(String catreInstutia) {
-        this.catreInstutia = catreInstutia;
-    }
 }

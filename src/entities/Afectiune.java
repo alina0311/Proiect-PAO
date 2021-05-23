@@ -30,8 +30,12 @@ public class Afectiune {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Afectiune)) return false;
+        if (this == o){
+            return true;
+        }
+        if (!(o instanceof Afectiune)){
+            return false;
+        }
         Afectiune afectiune = (Afectiune) o;
         return Objects.equals(dataDiagnostic, afectiune.dataDiagnostic) && Objects.equals(numeAfectiune, afectiune.numeAfectiune);
     }

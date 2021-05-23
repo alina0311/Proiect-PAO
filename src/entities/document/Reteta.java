@@ -14,7 +14,6 @@ public class Reteta extends Document{
 
     }
 
-
     public Reteta(int docId, String dataEliberarii, Medic medic, Pacient pacient, TreeMap<String, Integer> medicamente) {
         super(docId, dataEliberarii, medic, pacient);
         this.medicamente = medicamente;
@@ -22,7 +21,6 @@ public class Reteta extends Document{
 
     @Override
     public void afiseaza() {}
-
 
     @Override
     public String toString() {
@@ -32,9 +30,15 @@ public class Reteta extends Document{
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Reteta)) return false;
-        if (!super.equals(o)) return false;
+        if (this == o){
+            return true;
+        }
+        if (!(o instanceof Reteta)) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
         Reteta reteta = (Reteta) o;
         return Objects.equals(medicamente, reteta.medicamente);
     }
