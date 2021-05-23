@@ -10,16 +10,16 @@ import entities.persoana.angajat.Asistent;
 import entities.persoana.angajat.Medic;
 
 import javax.sound.midi.SysexMessage;
+import javax.xml.transform.Result;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 import java.util.*;
 
@@ -28,7 +28,9 @@ public class ServiciuDocument {
     public static ServiciuDocument s;
     static CabinetMedical c = CabinetMedical.getCabinet();
 
-    private ServiciuDocument (){}
+    private ServiciuDocument (){
+        conexiune();
+    }
 
     public static ServiciuDocument getCP(){
         if (s == null)
@@ -54,7 +56,234 @@ public class ServiciuDocument {
     }
 
     public void afisareDocumenteDB(){
-        conexiune();
+
+        System.out.println("\t Introdu:");
+        System.out.println("\t 1 pentru a afisa toate adeverintele medicale");
+        System.out.println("\t 2 pentru a afisa toate adeverintele de concediu");
+        System.out.println("\t 3 pentru a afisa toate trimiterile medicale");
+        System.out.println("\t 4 pentru a afisa toate retetele");
+        System.out.println("\t 5 pentru a afisa toate documentele.");
+
+        Scanner scanner = new Scanner(System.in);
+        int opt = scanner.nextInt();
+        if (opt == 1) {
+            afisareAdeverinteMedDB();
+        }
+        if (opt == 2) {
+            afisareAdeverinteConDB();
+        }
+        if (opt == 3) {
+            afisareTrimiteriDB();
+        }
+        if (opt == 4) {
+        afisareReteteDB();
+        }
+        if (opt == 5) {
+            afisareAdeverinteConDB();
+            afisareAdeverinteMedDB();
+            afisareTrimiteriDB();
+            afisareReteteDB();
+        }
+        else
+            while(opt != 1 && opt != 2 && opt != 3 && opt != 4 && opt != 5)
+                System.out.println("Introduceti o optiune valida! (1, 2, 3, 4, 5).");
+    }
+
+    public void afisareAdeverinteMedDB(){
+        try {
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM AdeverintaMedicala");
+
+            while (rs.next()){
+                System.out.println("ID: " + rs.getInt("doc_id") + ", " + "Data eliberarii: " + rs.getString("data_eliberare") + ", " + "ID medic: " + rs.getInt("id_medic") + ", " + "ID Pacient: " + rs.getInt("id_pacient") + ", " + "Apt: " + rs.getInt("apt") + ", " + "Scop: " + rs.getString("scop"));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+    public void afisareAdeverinteConDB(){
+        try {
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM AdeverintaConcediu");
+            while (rs.next()){
+                System.out.println("ID: " + rs.getInt("doc_id") + ", " + "Data eliberarii: " + rs.getString("data_eliberare") + ", " + "ID medic: " + rs.getInt("id_medic") + ", " + "ID Pacient: " + rs.getInt("id_pacient") + ", " + "Zile concediu: " + rs.getInt("zile_concediu") + ", " + "Data inceput: " + rs.getString("data_inceput"));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+    public void afisareTrimiteriDB(){
+        try {
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM TrimitereMedicala");
+            while (rs.next()){
+                System.out.println("ID: " + rs.getInt("doc_id") + ", " + "Data eliberarii: " + rs.getString("data_eliberare") + ", " + "ID medic: " + rs.getInt("id_medic") + ", " + "ID Pacient: " + rs.getInt("id_pacient") + ", " + "Scop: " + rs.getString("scop") + ", " + "Data valabilitate: " + rs.getString("data_valabil") + ", " + "Catre: " + rs.getString("catre"));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+    public void afisareReteteDB(){
+        try {
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Reteta");
+            while (rs.next()){
+                String medicam = rs.getString("medicamente");
+                String m = medicam.replace(">", " ");
+                System.out.println("ID: " + rs.getInt("doc_id") + ", " + "Data eliberarii: " + rs.getString("data_eliberare") + ", " + "ID medic: " + rs.getInt("id_medic") + ", " + "ID Pacient: " + rs.getInt("id_pacient") + ", Medicamente:" + m);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public void adaugaAdeverintaConDB(AdeverintaConcediu a){
+        int zile = a.getZileConcediu();
+        String data = a.getDataInceput();
+        String data_elib = a.getDataEliberarii();
+        int mid = a.getMedic().getIdPersoana();
+        int pid = a.getPacient().getIdPersoana();
+        int docID = 0;
+
+        try{
+            PreparedStatement pstmt = connection.prepareStatement("SELECT MAX(doc_id) + 1 FROM AdeverintaConcediu");
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()){
+                docID = rs.getInt(1);
+            }
+            if (docID == 0){
+                docID += 1;
+            }
+            String query = "INSERT INTO AdeverintaConcediu (doc_id, data_eliberare, id_medic, id_pacient, zile_concediu, data_inceput) " + "values (?, ?, ?, ?, ?, ?)";
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setInt(1, docID);
+            stmt.setString(2, data_elib);
+            stmt.setInt(3, mid);
+            stmt.setInt(4, pid);
+            stmt.setInt(5, zile);
+            stmt.setString(6, data);
+            stmt.executeUpdate();
+        }
+        catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        System.out.println("Adeverinta de concediu eliberata cu succes!");
+    }
+
+    public void adaugaTrimitereDB(TrimitereMedicala a){
+        String scop = a.getScop();
+        String data_exp = a.getDataEliberarii();
+        String catre = a.getCatreInstutia();
+        String data_elib = a.getDataEliberarii();
+        int mid = a.getMedic().getIdPersoana();
+        int pid = a.getPacient().getIdPersoana();
+        int docID = 0;
+
+        try{
+            PreparedStatement pstmt = connection.prepareStatement("SELECT MAX(doc_id) + 1 FROM TrimitereMedicala");
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()){
+                docID = rs.getInt(1);
+            }
+            if (docID == 0){
+                docID += 1;
+            }
+            String query = "INSERT INTO TrimitereMedicala (doc_id, data_eliberare, id_medic, id_pacient, scop, data_valabil, catre) " + "values (?, ?, ?, ?, ?, ?, ?)";
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setInt(1, docID);
+            stmt.setString(2, data_elib);
+            stmt.setInt(3, mid);
+            stmt.setInt(4, pid);
+            stmt.setString(5, scop);
+            stmt.setString(6, data_exp);
+            stmt.setString(7, catre);
+            stmt.executeUpdate();
+        }
+        catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        System.out.println("Trimiterea medicala eliberata cu succes!");
+    }
+
+    public void adaugaRetetaDB(Reteta a){
+        String data_elib = a.getDataEliberarii();
+        int mid = a.getMedic().getIdPersoana();
+        int pid = a.getPacient().getIdPersoana();
+        int docID = 0;
+
+        try{
+            PreparedStatement pstmt = connection.prepareStatement("SELECT MAX(doc_id) + 1 FROM Reteta");
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()){
+                docID = rs.getInt(1);
+            }
+            if (docID == 0){
+                docID += 1;
+            }
+
+            String medicam = "";
+            TreeMap<String, Integer> med = a.getMedicamente();
+            for (Map.Entry<String, Integer> pereche : med.entrySet()) {
+                medicam = medicam + pereche.getKey() + ":" + pereche.getValue() + ">";
+
+            }
+            String query = "INSERT INTO Reteta (doc_id, data_eliberare, id_medic, id_pacient, medicamente) " + "values (?, ?, ?, ?, ?)";
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setInt(1, docID);
+            stmt.setString(2, data_elib);
+            stmt.setInt(3, mid);
+            stmt.setInt(4, pid);
+            stmt.setString(5, medicam);
+            stmt.executeUpdate();
+        }
+        catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        System.out.println("Reteta eliberata cu succes!");
+    }
+
+    public void adaugaAdeverintaMedDB(AdeverintaMedicala a){
+        boolean apt = a.isApt();
+        String scop = a.getScop();
+        String data_elib = a.getDataEliberarii();
+        int mid = a.getMedic().getIdPersoana();
+        int pid = a.getPacient().getIdPersoana();
+        int docID = 0;
+
+        try{
+            PreparedStatement pstmt = connection.prepareStatement("SELECT MAX(doc_id) + 1 FROM AdeverintaMedicala");
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()){
+                docID = rs.getInt(1);
+            }
+            if (docID == 0){
+                docID += 1;
+            }
+            String query = "INSERT INTO AdeverintaMedicala (doc_id, data_eliberare, id_medic, id_pacient, apt, scop) " + "values (?, ?, ?, ?, ?, ?)";
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setInt(1, docID);
+            stmt.setString(2, data_elib);
+            stmt.setInt(3, mid);
+            stmt.setInt(4, pid);
+            int apt_int;
+            if (apt == true){
+                apt_int = 1;
+            }
+            else{
+                apt_int = 0;
+            }
+            stmt.setInt(5, apt_int);
+            stmt.setString(6, scop);
+            stmt.executeUpdate();
+        }
+        catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        System.out.println("Adeverinta medicala eliberata cu succes!");
     }
 
 
@@ -293,9 +522,8 @@ public class ServiciuDocument {
             String data = scanner.nextLine();
             AdeverintaConcediu d = new AdeverintaConcediu(id, str, m, p, zile, data);
             c.getDocumente().add(d);
-            try {
-                scrieCSV(d, "src/csv_files/AdeverinteConcediu.csv");
-            } catch (IOException ioException) { ioException.printStackTrace(); }
+                //scrieCSV(d, "src/csv_files/AdeverinteConcediu.csv");
+            adaugaAdeverintaConDB(d);
 
 
         }
@@ -311,9 +539,10 @@ public class ServiciuDocument {
 
             AdeverintaMedicala d = new AdeverintaMedicala(id, str, m, p, scop, apt);
             c.getDocumente().add(d);
-            try {
-                scrieCSV(d, "src/csv_files/AdeverinteMedicale.csv");
-            } catch (IOException ioException) { ioException.printStackTrace(); }
+//            try {
+                //scrieCSV(d, "src/csv_files/AdeverinteMedicale.csv");
+            adaugaAdeverintaMedDB(d);
+//            } catch (IOException ioException) { ioException.printStackTrace(); }
 
 
 
@@ -330,11 +559,10 @@ public class ServiciuDocument {
 
             TrimitereMedicala d = new TrimitereMedicala(id, str, m, p, scop, data, catre);
             c.getDocumente().add(d);
-            try {
-                scrieCSV(d, "src/csv_files/TrimiteriMedicale.csv");
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
+
+                //scrieCSV(d, "src/csv_files/TrimiteriMedicale.csv");
+            adaugaTrimitereDB(d);
+
 
         }
         if(opt == 4) {
@@ -356,11 +584,10 @@ public class ServiciuDocument {
             }
             Reteta d = new Reteta(id, str, m, p, r);
             c.getDocumente().add(d);
-            try {
-                scrieCSV(d, "src/csv_files/Retete.csv");
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
+
+                //scrieCSV(d, "src/csv_files/Retete.csv");
+            adaugaRetetaDB(d);
+
 
         }
     }

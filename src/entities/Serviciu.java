@@ -19,6 +19,7 @@ import java.util.*;
 import static entities.serviciu.ServiciuDocument.incarcareDocumente;
 
 public class Serviciu {
+
     static CabinetMedical c = CabinetMedical.getCabinet();
     static ServiciuProgramare cp = ServiciuProgramare.getCP();
     static ServiciuDocument cd = ServiciuDocument.getCP();
@@ -43,7 +44,6 @@ public class Serviciu {
         System.out.println("\t\t 2. Client.");
         System.out.println("\t\t 3. Admin.");
         System.out.println("\t\t 4. Nu am cont. Doresc sa ma inregistrez.");
-
         Scanner scanner = new Scanner(System.in);
         int opt = scanner.nextInt();
 
@@ -63,20 +63,6 @@ public class Serviciu {
         }
 
     }
-
-//    public void adaugaPacient(Pacient p){
-//        c.pacienti.add(p);
-//    }
-//    public void adaugaAngajat(Angajat a){
-//        c.angajati.add(a);
-//    }
-//    public void adaugaProg(Programare p){
-//        c.programari.add(p);
-//    }
-//    public void adaugaDoc(Document p){
-//        c.documente.add(p);
-//    }
-
 
     public static Audit getAudit() {
         return audit;
@@ -229,13 +215,15 @@ public class Serviciu {
             if (opt == 4) //afisareDocumente("permis");
             {
                 cd.afisareDocumenteDB();
+                audit.actiune("afisareDocumente");
             }
 
             if (opt == 5) calculValabilitate("permis");
             if (opt == 6) stergeProgramare("permis");
             if (opt == 7) //cd.elibereazaDocument();
             {
-                //cd.adaugaDocumentDB();
+                cd.elibereazaDocument();
+                audit.actiune("eliberareDocument");
             }
             if (opt == 8) stergeDocument();
         }
@@ -262,13 +250,13 @@ public class Serviciu {
             System.out.println("\t 6. Sterge programare.");
             System.out.println("\t 7. Exit.\n");
 
-
             Scanner scanner = new Scanner(System.in);
+
             opt = scanner.nextInt();
 
             if (opt == 1) afisareAngajati();
             if (opt == 2) afisareProgramari();
-            if (opt == 3) afisareDocumente(username);
+            if (opt == 3) cd.afisareDocumenteDB();
             if (opt == 4) calculValabilitate(username);
             if (opt == 5) cp.adaugaProgramare(username);
             if (opt == 6) stergeProgramare(username);
@@ -308,7 +296,10 @@ public class Serviciu {
             if (opt == 5) afisareProgramari();
             if (opt == 6) stergeProgramare("permis");
             if (opt == 7) calcuVenit();
-            if (opt == 8) afisareDocumente("permis");
+            if (opt == 8) {
+                cd.afisareDocumenteDB();
+                audit.actiune("afisareDocumente");
+            }
             if (opt == 9) stergeDocument();
             if (opt == 10) cu.adaugaAngajat();
         }
@@ -514,7 +505,15 @@ public class Serviciu {
                 }
             }
         }
-        audit.actiune("afisareDocumente");
+        audit.actiune("System.out.println(\"\\t Introdu:\");\n" +
+                "        System.out.println(\"\\t 1 pentru a elibera adeverinta de concediu\");\n" +
+                "        System.out.println(\"\\t 2 pentru a elibera adeverinta medicala\");\n" +
+                "        System.out.println(\"\\t 3 pentru a elibera trimitere medicala\");\n" +
+                "        System.out.println(\"\\t 4 pentru a elibera o reteta\");\n" +
+                "\n" +
+                "        Scanner scanner = new Scanner(System.in);\n" +
+                "        int opt = scanner.nextInt();\n" +
+                "        String ok = scanner.nextLine();ocumente");
     }
 
     public void stergeDocument(){

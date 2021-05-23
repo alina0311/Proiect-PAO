@@ -66,4 +66,5 @@ public class AdeverintaMedicala extends Document{
         this.apt = apt;
     }
 
+
 }
