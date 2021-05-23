@@ -1,9 +1,0 @@
-ID,Username,Email,Parola,Nume,Prenume,CNP,DataNasterii,Gen,Adresa,Telefon,Afectiuni
-5,andreea,andreea@yahoo.com,123,Popa,Andreea,6001102492019,09/11/2000,true,str mica,0756399211,0
-9,mihaela,mihaela@gmail.com,123,Popa,Mihaela,6001101492019,04/03/2000,true,str,0757200302,0
-10,kevin,kevin@yahoo.com,123,John,Kevin,6001103892019,04/11/1989,false,str,0757200302,0
-20,maria,maria@yahoo.com,123,Popescu,Maria-Antoaneta,6001103928412,09/02/1990,false,str,0758392012,0
-21,iorda,iordachescu@yahoo.com,123,Iordachescu,Anca,6001103928419,28/02/1999,true,str,0756299018,0
-22,vlad11,nicolescu@gmail.com,123,Nicolescu,Vlad,6001103928519,10/12/1979,true,str,0756299018,0
-23,ionel134,ionel@yahoo.com,123,Grigorescu,Ionel,6001229928419,13/09/1990,false,str,0751203401,0
-15,jeanv,jeav@email.com,123,Popr,Jean,6001103938412,04/05/1994,false,str merelor 3234,0757201203,0
