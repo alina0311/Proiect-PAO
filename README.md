@@ -32,7 +32,7 @@ Cerinte:
 - 🟣 enumul **Specializare** care apare in clasele **Medic** si **Asistent**.
 - 🟣 clasa **Programare** - *compunere* **Medic**, **Asistent**, **Pacient**.
 - 🟣 clasa **Cabinet Medical** - singleton: contine liste de tip *ArrayList* pentru documente, pacienti, programari si angajati;
-- 🟣 clasa **Serviciu** - clasa in care sunt implementate metode sau interogari in functie de rolul userului: angajat, admin sau pacient.
+- 🟣 clasa **Meniu** - clasa in care sunt implementate metode sau interogari in functie de rolul userului: angajat, admin sau pacient.
 - 🟣 clasa **Main** - din aceasta clasa se fac apeluri catre servicii.
 
 ### Functionalitati:
@@ -56,6 +56,7 @@ Cerinte:
 - 🟢  calculul valabilitatii ramase a unei trimiteri medicale oarecare;
 - 🟢  eliberarea unui document;
 - 🟢  stergerea unui document;
+- 🟢  editarea unui document;
 - 🟢  stergerea unei programari.
 
 #### Functionalitati adminului (pe langa cele ale unui angajat):
