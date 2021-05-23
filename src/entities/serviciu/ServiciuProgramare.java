@@ -2,7 +2,7 @@ package entities.serviciu;
 
 import entities.CabinetMedical;
 import entities.Programare;
-import entities.Serviciu;
+import entities.Meniu;
 import entities.persoana.Pacient;
 import entities.persoana.angajat.Angajat;
 import entities.persoana.angajat.Asistent;
@@ -77,18 +77,7 @@ public class ServiciuProgramare {
             FileWriter csvWriter = new FileWriter("src/csv_files/Programari.csv", true);
 
             if (file.length() == 0) {
-                csvWriter.append("ID");
-                csvWriter.append(",");
-                csvWriter.append("Ora");
-                csvWriter.append(",");
-                csvWriter.append("Data");
-                csvWriter.append(",");
-                csvWriter.append("Medic");
-                csvWriter.append(",");
-                csvWriter.append("Asistent");
-                csvWriter.append(",");
-                csvWriter.append("Pacient");
-                csvWriter.append("\n");
+                csvWriter.append("ID,Ora,Data,Medic,Asistent,Pacient \n");
             }
 
             String sId = Integer.toString(id);
@@ -100,7 +89,6 @@ public class ServiciuProgramare {
             csvWriter.append(String.join(",", a));
             csvWriter.append("\n");
 
-
             csvWriter.flush();
             csvWriter.close();
         }
@@ -109,10 +97,8 @@ public class ServiciuProgramare {
         }
 
         System.out.println("Programarea a fost adauga cu succes!");
-        Serviciu.getAudit().actiune("adaugareProgramare");
+        Meniu.getAudit().actiune("adaugareProgramare");
     }
-
-
 
     public static void incarcareProgramari(){
         List<Programare> prog = c.getProgramari();
@@ -144,20 +130,17 @@ public class ServiciuProgramare {
                 Asistent as = new Asistent();
                 Pacient p = new Pacient();
 
-
                 for(Angajat an : c.getAngajati()){
                     if(an.getIdPersoana() == mid)
                         m = (Medic) an;
                     if(an.getIdPersoana() == aid)
                         as = (Asistent) an;
-
                 }
 
                 for(Pacient pac : c.getPacienti()){
                     if (pac.getIdPersoana() == pid) {
                         p = pac;
                     }
-
                 }
 
                 Programare pr = new Programare(id, a[1], a[2], m, as, p);
@@ -165,13 +148,11 @@ public class ServiciuProgramare {
                     prog.add(pr);
                 }
 
-
                 rand = buff.readLine();
             }
         } catch (IOException ioe) { ioe.printStackTrace(); }
 
         c.setProgramari(prog);
     }
-
 
 }

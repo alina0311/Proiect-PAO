@@ -9,16 +9,13 @@ import entities.serviciu.Audit;
 import entities.serviciu.ServiciuDocument;
 import entities.serviciu.ServiciuProgramare;
 import entities.serviciu.ServiciuUser;
-
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.*;
 
 import static entities.serviciu.ServiciuDocument.incarcareDocumente;
 
-public class Serviciu {
+public class Meniu {
 
     static CabinetMedical c = CabinetMedical.getCabinet();
     static ServiciuProgramare cp = ServiciuProgramare.getCP();
@@ -29,11 +26,7 @@ public class Serviciu {
     private String connectionURL = "jdbc:sqlserver://pao-project.database.windows.net:1433;database=PAO-db;user=anca@pao-project;password=qwer1234!@#$;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
     private Connection connection;
 
-
-
-    public Serviciu(){
-
-    }
+    public Meniu(){ }
 
     public void afisareLogin(){
         cu.incarcarePacienti();
@@ -56,12 +49,10 @@ public class Serviciu {
         if(opt == 3){
             loginAdmin();
         }
-
         if(opt == 4){
             cu.adaugaClient();
             loginClient();
         }
-
     }
 
     public static Audit getAudit() {
@@ -86,7 +77,6 @@ public class Serviciu {
                     ok = 1;
                 }
             }
-
 
             if(ok == 1){
                 afisareMeniuAngajat();
@@ -132,7 +122,6 @@ public class Serviciu {
     public void loginAdmin(){
         int ok = 0;
         while(ok == 0){
-
             System.out.println("\t Introdu username-ul: ");
             Scanner scanner = new Scanner(System.in);
             String username = scanner.nextLine();
@@ -143,7 +132,6 @@ public class Serviciu {
             if(username.equals("admin") && parola.equals("admin1234")){
                 ok = 1;
             }
-
             if(ok == 1){
                 afisareServicii();
                 break;
@@ -153,7 +141,36 @@ public class Serviciu {
             }
         }
     }
+
     public static void incarcareToateDoc(){
+        ArrayList<AdeverintaMedicala> admed = null;
+        try {
+            admed = incarcareDocumente("ADEVERINTA MEDICALA", "src/csv_files/AdeverinteMedicale.csv");
+        } catch (IOException e) { e.printStackTrace(); }
+
+        ArrayList<AdeverintaConcediu> adcon = null;
+        try {
+            adcon = incarcareDocumente("ADEVERINTA CONCEDIU", "src/csv_files/AdeverinteConcediu.csv");
+        } catch (IOException e) { e.printStackTrace(); }
+
+        ArrayList<Reteta> ret = null;
+        try {
+            ret = incarcareDocumente("RETETA", "src/csv_files/Retete.csv");
+        } catch (IOException e) { e.printStackTrace(); }
+
+        ArrayList<TrimitereMedicala> trim = null;
+        try {
+            trim = incarcareDocumente("TRIMITERE MEDICALA", "src/csv_files/TrimiteriMedicale.csv");
+        } catch (IOException e) { e.printStackTrace(); }
+
+        List<Document> doc = c.getDocumente();
+        doc.addAll(admed);
+        doc.addAll(adcon);
+        doc.addAll(ret);
+        doc.addAll(trim);
+    }
+
+    public static void incarcareDocDB(){
         ArrayList<AdeverintaMedicala> admed = null;
         try {
             admed = incarcareDocumente("ADEVERINTA MEDICALA", "src/csv_files/AdeverinteMedicale.csv");
@@ -184,10 +201,6 @@ public class Serviciu {
     public void afisareMeniuAngajat(){
         cp.incarcareProgramari();
         incarcareToateDoc();
-
-
-
-
         cu.incarcarePacienti();
         cu.incarcareAngajati();
 
@@ -210,17 +223,26 @@ public class Serviciu {
             Scanner scanner = new Scanner(System.in);
             opt = scanner.nextInt();
 
-            if (opt == 1) afisareAngajati();
-            if (opt == 2) afisarePacienti();
-            if (opt == 3) afisareProgramari();
+            if (opt == 1) {
+                afisareAngajati();
+            }
+            if (opt == 2) {
+                afisarePacienti();
+            }
+            if (opt == 3) {
+                afisareProgramari();
+            }
             if (opt == 4) //afisareDocumente("permis");
             {
                 cd.afisareDocumenteDB();
                 audit.actiune("afisareDocumente");
             }
-
-            if (opt == 5) calculValabilitate("permis");
-            if (opt == 6) stergeProgramare("permis");
+            if (opt == 5){
+                calculValabilitate("permis");
+            }
+            if (opt == 6) {
+                stergeProgramare("permis");
+            }
             if (opt == 7) //cd.elibereazaDocument();
             {
                 cd.elibereazaDocument();
@@ -236,8 +258,6 @@ public class Serviciu {
             }
         }
     }
-
-
 
     public static void afisareMeniuClient(String username){
         cp.incarcareProgramari();
@@ -262,12 +282,24 @@ public class Serviciu {
 
             opt = scanner.nextInt();
 
-            if (opt == 1) afisareAngajati();
-            if (opt == 2) afisareProgramari();
-            if (opt == 3) cd.afisareDocumenteDB();
-            if (opt == 4) calculValabilitate(username);
-            if (opt == 5) cp.adaugaProgramare(username);
-            if (opt == 6) stergeProgramare(username);
+            if (opt == 1) {
+                afisareAngajati();
+            }
+            if (opt == 2) {
+                afisareProgramari();
+            }
+            if (opt == 3) {
+                cd.afisareDocumenteDB();
+            }
+            if (opt == 4) {
+                calculValabilitate(username);
+            }
+            if (opt == 5) {
+                cp.adaugaProgramare(username);
+            }
+            if (opt == 6) {
+                stergeProgramare(username);
+            }
         }
     }
 
@@ -298,13 +330,27 @@ public class Serviciu {
             Scanner scanner = new Scanner(System.in);
             opt = scanner.nextInt();
 
-            if (opt == 1) afisareAngajati();
-            if (opt == 2) stergeAngajat();
-            if (opt == 3) afisarePacienti();
-            if (opt == 4) stergePacient();
-            if (opt == 5) afisareProgramari();
-            if (opt == 6) stergeProgramare("permis");
-            if (opt == 7) calcuVenit();
+            if (opt == 1) {
+                afisareAngajati();
+            }
+            if (opt == 2) {
+                stergeAngajat();
+            }
+            if (opt == 3) {
+                afisarePacienti();
+            }
+            if (opt == 4) {
+                stergePacient();
+            }
+            if (opt == 5) {
+                afisareProgramari();
+            }
+            if (opt == 6) {
+                stergeProgramare("permis");
+            }
+            if (opt == 7) {
+                calcuVenit();
+            }
             if (opt == 8) {
                 cd.afisareDocumenteDB();
                 audit.actiune("afisareDocumente");
@@ -338,7 +384,6 @@ public class Serviciu {
             if(m instanceof Asistent){
                 System.out.println(m.getNume() + " " + m.getPrenume());
             }
-
         }
     }
 
@@ -351,15 +396,21 @@ public class Serviciu {
 
         Scanner scanner = new Scanner(System.in);
         int opt = scanner.nextInt();
-        if (opt == 1) afisareAsistenti();
-        if (opt == 2) afisareMedici();
+        if (opt == 1) {
+            afisareAsistenti();
+        }
+        if (opt == 2) {
+            afisareMedici();
+        }
         if (opt == 3) {
             afisareMedici();
             afisareAsistenti();
         }
-        else
-            while(opt != 1 && opt != 2 && opt != 3)
+        else{
+            while(opt != 1 && opt != 2 && opt != 3){
                 System.out.println("Introduceti o optiune valida! (1, 2, 3).");
+            }
+        }
         audit.actiune("afisareAngajati");
 
     }
@@ -371,22 +422,14 @@ public class Serviciu {
 
         System.out.println("Cabinetul medical are urmatoarele programari pentru data respectiva: ");
 
-        for (Programare p : c.getProgramari())
-            if(p.getDataProgramare().equals(data))
-            { System.out.println(p.toString()); }
+        for (Programare p : c.getProgramari()) {
+            if (p.getDataProgramare().equals(data)) {
+                System.out.println(p.toString());
+            }
+
+        }
         audit.actiune("afisareProgramari");
     }
-
-
-//    public void adaugaMedic(Medic m){
-//        Angajat a = m;
-//        c.angajati.add(a);
-//    }
-//
-//    public void adaugaAsistent(Asistent m){
-//        Angajat a = m;
-//        c.angajati.add(a);
-//    }
 
     public void stergeAngajat(){
         int ok = 0;
@@ -426,8 +469,8 @@ public class Serviciu {
         }
         audit.actiune("stergereAngajat");
     }
-    public void afisarePacienti(){
 
+    public void afisarePacienti(){
         System.out.println("Cabinetul medical are " +  Pacient.getNrPacienti() +  " pacienti: ");
 
         for (Pacient a : c.pacienti){
@@ -471,8 +514,6 @@ public class Serviciu {
 
         return nr;
     }
-
-
 
     public static void stergeProgramare(String username){
         int ok = 0;
@@ -521,15 +562,7 @@ public class Serviciu {
                 }
             }
         }
-        audit.actiune("System.out.println(\"\\t Introdu:\");\n" +
-                "        System.out.println(\"\\t 1 pentru a elibera adeverinta de concediu\");\n" +
-                "        System.out.println(\"\\t 2 pentru a elibera adeverinta medicala\");\n" +
-                "        System.out.println(\"\\t 3 pentru a elibera trimitere medicala\");\n" +
-                "        System.out.println(\"\\t 4 pentru a elibera o reteta\");\n" +
-                "\n" +
-                "        Scanner scanner = new Scanner(System.in);\n" +
-                "        int opt = scanner.nextInt();\n" +
-                "        String ok = scanner.nextLine();ocumente");
+        audit.actiune("afisareDocumente");
     }
 
     public void stergeDocument(){

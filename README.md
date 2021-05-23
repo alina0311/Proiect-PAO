@@ -79,3 +79,17 @@ Implementare:
 - 🟣 clasa singleton **ServiciuProgramare** cu metodele *adaugaProgramare* si *incarcareProgramari*
 - 🟣 clasa singleton **ServiciuUser** cu metodele *adaugaClient*, *adaugaAngajat*, *incarcareAngajati* si *incarcarePacienti*
 - 🟣 clasa singleton **Audit** cu metoda *actiune*
+
+
+---
+## Partea III:
+Cerinte:
+- [x] realizarea de servicii ce permit operatii de tipul create, read, update si delete pentru cel puțin 4 dintre clasele definite.
+
+Implementare:
+- 🔵 am creat baza de date in *Amazon Web Services*
+- 🔵 am creat tabelele: **AdeverintaMedicala**, **AdeverintaConcediu**, **TrimitereMedicala**, **Retetata** in *MySQL Workbench*
+![](diagram.jpg)
+- 🔵 am stabilit conexiunea cu baza de date intr-o metoda numita **conexiune** din clasa **ServiciuDocument**
+- 🔵 am realizat 3 metode generale: **editareDocument**, **stergeDocument**, **afisareDocumenteDB** si vechea metoda **elibereazaDocument** care ma ajutau sa apelez functiile descrise mai jos, in functie de tipul documentului
+- 🔵 pentru fiecare dintre cele 4 clase, am creat o functie de **stergeTipDocumentDB**, **adaugaTipDocumentDB**, **afisareTipDocumentDB**, **editareTipDocumentDB** unde TipDocument: "AdeverintaMed", "AdeverintaCon", "TrimitereMed", "Reteta".

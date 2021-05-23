@@ -1,16 +1,11 @@
 package entities.serviciu;
 
 import entities.CabinetMedical;
-import entities.Programare;
-import entities.Serviciu;
+import entities.Meniu;
 import entities.document.*;
 import entities.persoana.Pacient;
 import entities.persoana.angajat.Angajat;
-import entities.persoana.angajat.Asistent;
 import entities.persoana.angajat.Medic;
-
-import javax.sound.midi.SysexMessage;
-import javax.xml.transform.Result;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -52,7 +47,7 @@ public class ServiciuDocument {
         }
         catch (SQLException throwables) {
             throwables.printStackTrace();
-            //System.out.println("FAILURE");
+            //System.out.println("ESEC");
         }
     }
 
@@ -89,7 +84,6 @@ public class ServiciuDocument {
             System.out.println("\t Introduceti numarul de medicamente: ");
             int nr = scanner.nextInt();
             String ok2 = scanner.nextLine();
-
             System.out.println("\t Introduceti pe cate o linie numele medicamentului si de cate ori pe zi trebuie administrat: ");
 
             String ret;
@@ -104,19 +98,22 @@ public class ServiciuDocument {
 
             editareRetetaDB(id, medicam);
         }
-        else
+        else{
             while(opt != 1 && opt != 2 && opt != 3 && opt != 4)
+            {
                 System.out.println("Introduceti o optiune valida! (1, 2, 3, 4).");
+            }
+        }
+
     }
 
     public void editareAdeverintaMedDB(int id, String scop){
         try {
-            Statement stmt = connection.createStatement();
             String query = "UPDATE AdeverintaMedicala SET scop = ? WHERE doc_id = ?";
             PreparedStatement preparedStmt = connection.prepareStatement(query);
             preparedStmt.setString(1, scop);
             preparedStmt.setInt(2, id);
-            preparedStmt.executeUpdate();
+            preparedStmt.executeUpdate(); //rulez query
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -125,7 +122,6 @@ public class ServiciuDocument {
 
     public void editareAdeverintaConDB(int id, int zile){
         try {
-            Statement stmt = connection.createStatement();
             String query = "UPDATE AdeverintaConcediu SET zile_concediu = ? WHERE doc_id = ?";
             PreparedStatement preparedStmt = connection.prepareStatement(query);
             preparedStmt.setInt(1, zile);
@@ -139,7 +135,6 @@ public class ServiciuDocument {
 
     public void editareTrimitereDB(int id, String data){
         try {
-            Statement stmt = connection.createStatement();
             String query = "UPDATE TrimitereMedicala SET data_valabil = ? WHERE doc_id = ?";
             PreparedStatement preparedStmt = connection.prepareStatement(query);
             preparedStmt.setString(1, data);
@@ -153,20 +148,16 @@ public class ServiciuDocument {
 
     public void editareRetetaDB(int id, String medicam){
         try {
-
-            Statement stmt = connection.createStatement();
             String query = "UPDATE Reteta SET medicamente = ? WHERE doc_id = ?";
             PreparedStatement preparedStmt = connection.prepareStatement(query);
             preparedStmt.setString(1, medicam);
             preparedStmt.setInt(2, id);
             preparedStmt.executeUpdate();
-            //ok
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
         System.out.println("Reteta editata cu succes!");
     }
-
 
     public void stergeDocument(){
 
@@ -177,7 +168,6 @@ public class ServiciuDocument {
         System.out.println("\t 4 pentru a sterge o reteta.");
         Scanner scanner = new Scanner(System.in);
         int opt = scanner.nextInt();
-
         System.out.println("\t Introdu id-ul documentului pe care doresti sa il stergi:");
         int id = scanner.nextInt();
 
@@ -193,14 +183,15 @@ public class ServiciuDocument {
         if (opt == 4) {
             stergeRetetaDB(id);
         }
-        else
-            while(opt != 1 && opt != 2 && opt != 3 && opt != 4)
+        else{
+            while(opt != 1 && opt != 2 && opt != 3 && opt != 4){
                 System.out.println("Introduceti o optiune valida! (1, 2, 3, 4).");
+            }
+        }
     }
 
     public void stergeAdeverintaMedDB(int id){
         try {
-            Statement stmt = connection.createStatement();
             String query = "DELETE FROM AdeverintaMedicala WHERE doc_id = ?";
             PreparedStatement preparedStmt = connection.prepareStatement(query);
             preparedStmt.setInt(1, id);
@@ -213,7 +204,6 @@ public class ServiciuDocument {
 
     public void stergeAdeverintaConDB(int id){
         try {
-            Statement stmt = connection.createStatement();
             String query = "DELETE FROM AdeverintaConcediu WHERE doc_id = ?";
             PreparedStatement preparedStmt = connection.prepareStatement(query);
             preparedStmt.setInt(1, id);
@@ -226,7 +216,6 @@ public class ServiciuDocument {
 
     public void stergeTrimitereDB(int id){
         try {
-            Statement stmt = connection.createStatement();
             String query = "DELETE FROM TrimitereMedicala WHERE doc_id = ?";
             PreparedStatement preparedStmt = connection.prepareStatement(query);
             preparedStmt.setInt(1, id);
@@ -239,7 +228,6 @@ public class ServiciuDocument {
 
     public void stergeRetetaDB(int id){
         try {
-            Statement stmt = connection.createStatement();
             String query = "DELETE FROM Reteta WHERE doc_id = ?";
             PreparedStatement preparedStmt = connection.prepareStatement(query);
             preparedStmt.setInt(1, id);
@@ -251,7 +239,6 @@ public class ServiciuDocument {
     }
 
     public void afisareDocumenteDB(){
-
         System.out.println("\t Introdu:");
         System.out.println("\t 1 pentru a afisa toate adeverintele medicale");
         System.out.println("\t 2 pentru a afisa toate adeverintele de concediu");
@@ -271,7 +258,7 @@ public class ServiciuDocument {
             afisareTrimiteriDB();
         }
         if (opt == 4) {
-        afisareReteteDB();
+            afisareReteteDB();
         }
         if (opt == 5) {
             afisareAdeverinteConDB();
@@ -279,16 +266,17 @@ public class ServiciuDocument {
             afisareTrimiteriDB();
             afisareReteteDB();
         }
-        else
-            while(opt != 1 && opt != 2 && opt != 3 && opt != 4 && opt != 5)
+        else{
+            while(opt != 1 && opt != 2 && opt != 3 && opt != 4 && opt != 5){
                 System.out.println("Introduceti o optiune valida! (1, 2, 3, 4, 5).");
+            }
+        }
     }
 
     public void afisareAdeverinteMedDB(){
         try {
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM AdeverintaMedicala");
-
             while (rs.next()){
                 System.out.println("ID: " + rs.getInt("doc_id") + ", " + "Data eliberarii: " + rs.getString("data_eliberare") + ", " + "ID medic: " + rs.getInt("id_medic") + ", " + "ID Pacient: " + rs.getInt("id_pacient") + ", " + "Apt: " + rs.getInt("apt") + ", " + "Scop: " + rs.getString("scop"));
             }
@@ -481,7 +469,6 @@ public class ServiciuDocument {
         System.out.println("Adeverinta medicala eliberata cu succes!");
     }
 
-
     public static <O> void scrieCSV(O obiect, String path) throws IOException {
         switch (obiect.getClass().getSimpleName()) {
             case "AdeverintaConcediu" -> {
@@ -492,22 +479,9 @@ public class ServiciuDocument {
                         file.createNewFile();
                     }
                     FileWriter csvWriter = new FileWriter("src/csv_files/AdeverinteConcediu.csv", true);
-
                     if (file.length() == 0) {
-                        csvWriter.append("ID");
-                        csvWriter.append(",");
-                        csvWriter.append("DataEliberarii");
-                        csvWriter.append(",");
-                        csvWriter.append("Medic");
-                        csvWriter.append(",");
-                        csvWriter.append("Pacient");
-                        csvWriter.append(",");
-                        csvWriter.append("ZileConcediu");
-                        csvWriter.append(",");
-                        csvWriter.append("DataInceput");
-                        csvWriter.append("\n");
+                        csvWriter.append("ID,DataEliberarii,Medic,Pacient,ZileConcediu,DataInceput \n");
                     }
-
                     String idS = Integer.toString(ad.getDocId());
                     String mId = Integer.toString(ad.getMedic().getIdPersoana());
                     String pId = Integer.toString(ad.getPacient().getIdPersoana());
@@ -516,8 +490,6 @@ public class ServiciuDocument {
                     List<String> a = Arrays.asList(idS, ad.getDataEliberarii(), mId, pId, zileS, zileS, ad.getDataInceput());
                     csvWriter.append(String.join(",", a));
                     csvWriter.append("\n");
-
-
                     csvWriter.flush();
                     csvWriter.close();
                 } catch (IOException e) {
@@ -535,20 +507,8 @@ public class ServiciuDocument {
                         file.createNewFile();
                     }
                     FileWriter csvWriter = new FileWriter("src/csv_files/AdeverinteMedicale.csv", true);
-
                     if (file.length() == 0) {
-                        csvWriter.append("ID");
-                        csvWriter.append(",");
-                        csvWriter.append("DataEliberarii");
-                        csvWriter.append(",");
-                        csvWriter.append("Medic");
-                        csvWriter.append(",");
-                        csvWriter.append("Pacient");
-                        csvWriter.append(",");
-                        csvWriter.append("Scop");
-                        csvWriter.append(",");
-                        csvWriter.append("Apt");
-                        csvWriter.append("\n");
+                        csvWriter.append("ID,DataEliberarii,Medic,Pacient,Scop,Apt \n");
                     }
 
                     String idS = Integer.toString(am.getDocId());
@@ -559,8 +519,6 @@ public class ServiciuDocument {
                     List<String> a = Arrays.asList(idS, am.getDataEliberarii(), mId, pId, am.getScop(), aptS);
                     csvWriter.append(String.join(",", a));
                     csvWriter.append("\n");
-
-
                     csvWriter.flush();
                     csvWriter.close();
                 } catch (IOException e) {
@@ -577,34 +535,16 @@ public class ServiciuDocument {
                         file.createNewFile();
                     }
                     FileWriter csvWriter = new FileWriter("src/csv_files/TrimiteriMedicale.csv", true);
-
                     if (file.length() == 0) {
-                        csvWriter.append("ID");
-                        csvWriter.append(",");
-                        csvWriter.append("DataEliberarii");
-                        csvWriter.append(",");
-                        csvWriter.append("Medic");
-                        csvWriter.append(",");
-                        csvWriter.append("Pacient");
-                        csvWriter.append(",");
-                        csvWriter.append("Scop");
-                        csvWriter.append(",");
-                        csvWriter.append("DataValabilitate");
-                        csvWriter.append(",");
-                        csvWriter.append("Institutie");
-                        csvWriter.append("\n");
+                        csvWriter.append("ID,DataEliberarii,Medic,Pacient,Scop,DataValabilitate,Institutie \n");
                     }
-
                     String idS = Integer.toString(t.getDocId());
                     String mId = Integer.toString(t.getMedic().getIdPersoana());
                     String pId = Integer.toString(t.getPacient().getIdPersoana());
 
-
                     List<String> a = Arrays.asList(idS, t.getDataEliberarii(), mId, pId, t.getScop(), t.getDataExprValabilitate(), t.getCatreInstutia());
                     csvWriter.append(String.join(",", a));
                     csvWriter.append("\n");
-
-
                     csvWriter.flush();
                     csvWriter.close();
                 } catch (IOException e) {
@@ -622,18 +562,8 @@ public class ServiciuDocument {
                         file.createNewFile();
                     }
                     FileWriter csvWriter = new FileWriter("src/csv_files/Retete.csv", true);
-
                     if (file.length() == 0) {
-                        csvWriter.append("ID");
-                        csvWriter.append(",");
-                        csvWriter.append("DataEliberarii");
-                        csvWriter.append(",");
-                        csvWriter.append("Medic");
-                        csvWriter.append(",");
-                        csvWriter.append("Pacient");
-                        csvWriter.append(",");
-                        csvWriter.append("Medicamente");
-                        csvWriter.append("\n");
+                        csvWriter.append("ID,DataEliberarii,Medic,Pacient,Medicamente \n");
                     }
 
                     String idS = Integer.toString(r.getDocId());
@@ -648,12 +578,9 @@ public class ServiciuDocument {
 
                     }
 
-
                     List<String> a = Arrays.asList(idS, r.getDataEliberarii(), mId, pId, medicam);
                     csvWriter.append(String.join(",", a));
                     csvWriter.append("\n");
-
-
                     csvWriter.flush();
                     csvWriter.close();
                 } catch (IOException e) {
@@ -661,12 +588,10 @@ public class ServiciuDocument {
                 }
 
                 System.out.println("Reteta a fost eliberata cu succes!");
-
-                Serviciu.getAudit().actiune("eliberareDocument");
+                Meniu.getAudit().actiune("eliberareDocument");
             }
 
         }
-
 
     }
 
@@ -680,18 +605,14 @@ public class ServiciuDocument {
         Scanner scanner = new Scanner(System.in);
         int opt = scanner.nextInt();
         String ok = scanner.nextLine();
-
         int id = Document.getNrDocumente() + 1;
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date today = new Date();
         String str = dateFormat.format(today);
-
         System.out.println("\t Introduceti numele medicului: ");
         String nume = scanner.nextLine();
-
         System.out.println("\t Introduceti prenumele medicului: ");
         String prenume = scanner.nextLine();
-
         System.out.println("\t Introduceti cnp-ul pacientului: ");
         String cnp = scanner.nextLine();
 
@@ -717,9 +638,11 @@ public class ServiciuDocument {
             String data = scanner.nextLine();
             AdeverintaConcediu d = new AdeverintaConcediu(id, str, m, p, zile, data);
             c.getDocumente().add(d);
-                //scrieCSV(d, "src/csv_files/AdeverinteConcediu.csv");
-            adaugaAdeverintaConDB(d);
-
+            try {
+                scrieCSV(d, "src/csv_files/AdeverinteConcediu.csv");
+                adaugaAdeverintaConDB(d);
+            }
+            catch (IOException ioException) { ioException.printStackTrace(); }
 
         }
         if(opt == 2){
@@ -734,13 +657,11 @@ public class ServiciuDocument {
 
             AdeverintaMedicala d = new AdeverintaMedicala(id, str, m, p, scop, apt);
             c.getDocumente().add(d);
-//            try {
-                //scrieCSV(d, "src/csv_files/AdeverinteMedicale.csv");
-            adaugaAdeverintaMedDB(d);
-//            } catch (IOException ioException) { ioException.printStackTrace(); }
-
-
-
+            try {
+                scrieCSV(d, "src/csv_files/AdeverinteMedicale.csv");
+                adaugaAdeverintaMedDB(d);
+            }
+            catch (IOException ioException) { ioException.printStackTrace(); }
         }
         if(opt == 3) {
             System.out.println("\t Introduceti scopul: ");
@@ -755,10 +676,11 @@ public class ServiciuDocument {
             TrimitereMedicala d = new TrimitereMedicala(id, str, m, p, scop, data, catre);
             c.getDocumente().add(d);
 
-                //scrieCSV(d, "src/csv_files/TrimiteriMedicale.csv");
-            adaugaTrimitereDB(d);
-
-
+            try {
+                scrieCSV(d, "src/csv_files/TrimiteriMedicale.csv");
+                adaugaTrimitereDB(d);
+            }
+            catch (IOException ioException) { ioException.printStackTrace(); }
         }
         if(opt == 4) {
             System.out.println("\t Introduceti numarul de medicamente: ");
@@ -779,20 +701,19 @@ public class ServiciuDocument {
             }
             Reteta d = new Reteta(id, str, m, p, r);
             c.getDocumente().add(d);
-
-                //scrieCSV(d, "src/csv_files/Retete.csv");
-            adaugaRetetaDB(d);
-
+            try {
+                scrieCSV(d, "src/csv_files/Retete.csv");
+                adaugaRetetaDB(d);
+            }
+            catch (IOException ioException) { ioException.printStackTrace(); }
 
         }
     }
 
     public static <T> ArrayList<T> incarcareDocumente(String option, String calea) throws IOException
     {
-
         ArrayList<T> generaldocs = new ArrayList<T>();
         Path path = Paths.get(calea);
-        //List<Document> doc = c.getDocumente();
         switch (option.toUpperCase()) {
             case "ADEVERINTA CONCEDIU" -> {
                 try (BufferedReader buff = Files.newBufferedReader(path, StandardCharsets.US_ASCII))
@@ -817,11 +738,8 @@ public class ServiciuDocument {
                             pid = 0;
 
                         }
-
                         Medic m = new Medic();
                         Pacient p = new Pacient();
-
-
                         for(Angajat an : c.getAngajati()){
                             if(an.getIdPersoana() == mid)
                                 m = (Medic) an;
@@ -835,9 +753,6 @@ public class ServiciuDocument {
                         }
                         int zile = Integer.parseInt(a[4]);
                         AdeverintaConcediu ac = new AdeverintaConcediu(id, a[1], m, p, zile, a[5]);
-//                        if (doc.contains(ac) == false){
-//                            doc.add(ac);
-//                        }
                         generaldocs.add((T) ac);
 
                         rand = buff.readLine();
@@ -871,7 +786,6 @@ public class ServiciuDocument {
                         Medic m = new Medic();
                         Pacient p = new Pacient();
 
-
                         for(Angajat an : c.getAngajati()){
                             if(an.getIdPersoana() == mid)
                                 m = (Medic) an;
@@ -885,9 +799,6 @@ public class ServiciuDocument {
                         }
                         boolean apt = Boolean.parseBoolean(a[5]);
                         AdeverintaMedicala ac = new AdeverintaMedicala(id, a[1], m, p, a[4], apt);
-//                        if (doc.contains(ac) == false){
-//                            doc.add(ac);
-//                        }
                         generaldocs.add((T) ac);
 
                         rand = buff.readLine();
@@ -922,19 +833,16 @@ public class ServiciuDocument {
                         Medic m = new Medic();
                         Pacient p = new Pacient();
 
-
                         for(Angajat an : c.getAngajati()){
                             if(an.getIdPersoana() == mid)
                                 m = (Medic) an;
                         }
-
                         for(Pacient pac : c.getPacienti()){
                             if (pac.getIdPersoana() == pid) {
                                 p = pac;
                             }
 
                         }
-
                         TreeMap<String, Integer> med = new TreeMap<String, Integer>();
 
                         String s = a[4]; //ultimul string
@@ -945,15 +853,8 @@ public class ServiciuDocument {
                             int nr = Integer.parseInt(pr[1]); //parsez nr pt medicamente
                             med.put(pr[0], nr);
                         }
-
-
-
                         Reteta ac = new Reteta(id, a[1], m, p, med);
-//                        if (doc.contains(ac) == false){
-//                            doc.add(ac);
-//                        }
                         generaldocs.add((T) ac);
-
 
                         rand = buff.readLine();
                     }
@@ -987,12 +888,10 @@ public class ServiciuDocument {
                         Medic m = new Medic();
                         Pacient p = new Pacient();
 
-
                         for(Angajat an : c.getAngajati()){
                             if(an.getIdPersoana() == mid)
                                 m = (Medic) an;
                         }
-
                         for(Pacient pac : c.getPacienti()){
                             if (pac.getIdPersoana() == pid) {
                                 p = pac;
@@ -1002,7 +901,6 @@ public class ServiciuDocument {
 
                         TrimitereMedicala ac = new TrimitereMedicala (id, a[1], m, p, a[4], a[5], a[6]);
                         generaldocs.add((T) ac);
-
 
                         rand = buff.readLine();
                     }
