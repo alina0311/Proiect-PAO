@@ -29,6 +29,7 @@ public class ServiciuDocument {
     static CabinetMedical c = CabinetMedical.getCabinet();
 
     private ServiciuDocument (){
+
         conexiune();
     }
 
@@ -47,12 +48,205 @@ public class ServiciuDocument {
     public void conexiune() {
         try{
             connection = DriverManager.getConnection(connectionURL, username, password);
-            System.out.println("SUCCES");
+            //System.out.println("SUCCES");
         }
         catch (SQLException throwables) {
             throwables.printStackTrace();
-            System.out.println("FAILURE");
+            //System.out.println("FAILURE");
         }
+    }
+
+    public void editareDocument(){
+
+        System.out.println("\t Introdu:");
+        System.out.println("\t 1 pentru a edita scopul unei adeverinte medicale");
+        System.out.println("\t 2 pentru a edita zilele unei adeverinte de concediu");
+        System.out.println("\t 3 pentru a edita data valabilitatii unei trimitere medicala");
+        System.out.println("\t 4 pentru a edita medicamentele prescrise pe o reteta.");
+        Scanner scanner = new Scanner(System.in);
+        int opt = scanner.nextInt();
+
+        System.out.println("\t Introdu id-ul documentului pe care doresti sa il editezi:");
+        int id = scanner.nextInt();
+        String ok1 = scanner.nextLine();
+
+        if (opt == 1) {
+            System.out.println("\t Dati noul scop:");
+            String scop = scanner.nextLine();
+            editareAdeverintaMedDB(id, scop);
+        }
+        if (opt == 2) {
+            System.out.println("\t Dati numarul de zile:");
+            int zile = scanner.nextInt();
+            editareAdeverintaConDB(id, zile);
+        }
+        if (opt == 3) {
+            System.out.println("\t Dati noua data de valabilitate:");
+            String data = scanner.nextLine();
+            editareTrimitereDB(id, data);
+        }
+        if (opt == 4) {
+            System.out.println("\t Introduceti numarul de medicamente: ");
+            int nr = scanner.nextInt();
+            String ok2 = scanner.nextLine();
+
+            System.out.println("\t Introduceti pe cate o linie numele medicamentului si de cate ori pe zi trebuie administrat: ");
+
+            String ret;
+            String medicam = "";
+            while (nr > 0) {
+                ret = scanner.nextLine();
+                String med = ret.split(" ")[0];
+                int n = Integer.parseInt(ret.split(" ")[1]);
+                medicam = medicam + med + ":" + n + ">";
+                nr--;
+            }
+
+            editareRetetaDB(id, medicam);
+        }
+        else
+            while(opt != 1 && opt != 2 && opt != 3 && opt != 4)
+                System.out.println("Introduceti o optiune valida! (1, 2, 3, 4).");
+    }
+
+    public void editareAdeverintaMedDB(int id, String scop){
+        try {
+            Statement stmt = connection.createStatement();
+            String query = "UPDATE AdeverintaMedicala SET scop = ? WHERE doc_id = ?";
+            PreparedStatement preparedStmt = connection.prepareStatement(query);
+            preparedStmt.setString(1, scop);
+            preparedStmt.setInt(2, id);
+            preparedStmt.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        System.out.println("Adeverinta medicala editata cu succes!");
+    }
+
+    public void editareAdeverintaConDB(int id, int zile){
+        try {
+            Statement stmt = connection.createStatement();
+            String query = "UPDATE AdeverintaConcediu SET zile_concediu = ? WHERE doc_id = ?";
+            PreparedStatement preparedStmt = connection.prepareStatement(query);
+            preparedStmt.setInt(1, zile);
+            preparedStmt.setInt(2, id);
+            preparedStmt.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        System.out.println("Adeverinta de concediu editata cu succes!");
+    }
+
+    public void editareTrimitereDB(int id, String data){
+        try {
+            Statement stmt = connection.createStatement();
+            String query = "UPDATE TrimitereMedicala SET data_valabil = ? WHERE doc_id = ?";
+            PreparedStatement preparedStmt = connection.prepareStatement(query);
+            preparedStmt.setString(1, data);
+            preparedStmt.setInt(2, id);
+            preparedStmt.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        System.out.println("Trimitere medicala editata cu succes!");
+    }
+
+    public void editareRetetaDB(int id, String medicam){
+        try {
+
+            Statement stmt = connection.createStatement();
+            String query = "UPDATE Reteta SET medicamente = ? WHERE doc_id = ?";
+            PreparedStatement preparedStmt = connection.prepareStatement(query);
+            preparedStmt.setString(1, medicam);
+            preparedStmt.setInt(2, id);
+            preparedStmt.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        System.out.println("Reteta editata cu succes!");
+    }
+
+
+    public void stergeDocument(){
+
+        System.out.println("\t Introdu:");
+        System.out.println("\t 1 pentru a sterge o adeverinta medicala");
+        System.out.println("\t 2 pentru a sterge o adeverinta de concediu");
+        System.out.println("\t 3 pentru a sterge o trimitere medicala");
+        System.out.println("\t 4 pentru a sterge o reteta.");
+        Scanner scanner = new Scanner(System.in);
+        int opt = scanner.nextInt();
+
+        System.out.println("\t Introdu id-ul documentului pe care doresti sa il stergi:");
+        int id = scanner.nextInt();
+
+        if (opt == 1) {
+            stergeAdeverintaMedDB(id);
+        }
+        if (opt == 2) {
+            stergeAdeverintaConDB(id);
+        }
+        if (opt == 3) {
+            stergeTrimitereDB(id);
+        }
+        if (opt == 4) {
+            stergeRetetaDB(id);
+        }
+        else
+            while(opt != 1 && opt != 2 && opt != 3 && opt != 4)
+                System.out.println("Introduceti o optiune valida! (1, 2, 3, 4).");
+    }
+
+    public void stergeAdeverintaMedDB(int id){
+        try {
+            Statement stmt = connection.createStatement();
+            String query = "DELETE FROM AdeverintaMedicala WHERE doc_id = ?";
+            PreparedStatement preparedStmt = connection.prepareStatement(query);
+            preparedStmt.setInt(1, id);
+            preparedStmt.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        System.out.println("Reteta stearsa cu succes!");
+    }
+
+    public void stergeAdeverintaConDB(int id){
+        try {
+            Statement stmt = connection.createStatement();
+            String query = "DELETE FROM AdeverintaConcediu WHERE doc_id = ?";
+            PreparedStatement preparedStmt = connection.prepareStatement(query);
+            preparedStmt.setInt(1, id);
+            preparedStmt.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        System.out.println("Reteta stearsa cu succes!");
+    }
+
+    public void stergeTrimitereDB(int id){
+        try {
+            Statement stmt = connection.createStatement();
+            String query = "DELETE FROM TrimitereMedicala WHERE doc_id = ?";
+            PreparedStatement preparedStmt = connection.prepareStatement(query);
+            preparedStmt.setInt(1, id);
+            preparedStmt.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        System.out.println("Reteta stearsa cu succes!");
+    }
+
+    public void stergeRetetaDB(int id){
+        try {
+            Statement stmt = connection.createStatement();
+            String query = "DELETE FROM Reteta WHERE doc_id = ?";
+            PreparedStatement preparedStmt = connection.prepareStatement(query);
+            preparedStmt.setInt(1, id);
+            preparedStmt.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        System.out.println("Reteta stearsa cu succes!");
     }
 
     public void afisareDocumenteDB(){

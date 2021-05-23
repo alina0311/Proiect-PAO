@@ -192,7 +192,7 @@ public class Serviciu {
         cu.incarcareAngajati();
 
         int opt = 0;
-        while(opt != 9) {
+        while(opt != 10) {
             System.out.println("\n\t-------------------------------------------\n");
             System.out.println("\t\t MENIU:\n");
             System.out.println("\t Alegeti dintre urmatoarele optiuni:");
@@ -204,7 +204,8 @@ public class Serviciu {
             System.out.println("\t 6. Sterge programare.");
             System.out.println("\t 7. Elibereaza document.");
             System.out.println("\t 8. Sterge document.");
-            System.out.println("\t 9. Exit.\n");
+            System.out.println("\t 9. Editeaza document.");
+            System.out.println("\t 10. Exit.\n");
 
             Scanner scanner = new Scanner(System.in);
             opt = scanner.nextInt();
@@ -225,7 +226,14 @@ public class Serviciu {
                 cd.elibereazaDocument();
                 audit.actiune("eliberareDocument");
             }
-            if (opt == 8) stergeDocument();
+            if (opt == 8) {
+                cd.stergeDocument();
+                audit.actiune("stergereDocument");
+            }
+            if (opt == 9) {
+                cd.editareDocument();
+                audit.actiune("editareDocument");
+            }
         }
     }
 
@@ -270,7 +278,7 @@ public class Serviciu {
         cu.incarcareAngajati();
 
         int opt = 0;
-        while(opt != 11) {
+        while(opt != 12) {
             System.out.println("\n\t-------------------------------------------\n");
             System.out.println("\t\t MENIU:\n");
             System.out.println("\t Alegeti dintre urmatoarele optiuni:");
@@ -283,8 +291,9 @@ public class Serviciu {
             System.out.println("\t 7. Calculeaza venit angajat.");
             System.out.println("\t 8. Afiseaza documente.");
             System.out.println("\t 9. Sterge document.");
-            System.out.println("\t 10. Adauga angajat.");
-            System.out.println("\t 11. Exit.\n");
+            System.out.println("\t 10. Editare document.");
+            System.out.println("\t 11. Adauga angajat.");
+            System.out.println("\t 12. Exit.\n");
 
             Scanner scanner = new Scanner(System.in);
             opt = scanner.nextInt();
@@ -300,8 +309,15 @@ public class Serviciu {
                 cd.afisareDocumenteDB();
                 audit.actiune("afisareDocumente");
             }
-            if (opt == 9) stergeDocument();
-            if (opt == 10) cu.adaugaAngajat();
+            if (opt == 9) {
+                cd.editareDocument();
+                audit.actiune("editareDocument");
+            }
+            if (opt == 10){
+                cd.stergeDocument();
+                audit.actiune("stergereDocument");
+            }
+            if (opt == 11) cu.adaugaAngajat();
         }
     }
 
