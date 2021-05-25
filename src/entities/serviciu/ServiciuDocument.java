@@ -351,7 +351,7 @@ public class ServiciuDocument {
             throwables.printStackTrace();
         }
 
-        System.out.println("Adeverinta de concediu eliberata cu succes!");
+        //System.out.println("Adeverinta de concediu eliberata cu succes!");
     }
 
     public void adaugaTrimitereDB(TrimitereMedicala a){
@@ -387,7 +387,7 @@ public class ServiciuDocument {
             throwables.printStackTrace();
         }
 
-        System.out.println("Trimiterea medicala eliberata cu succes!");
+        //System.out.println("Trimiterea medicala eliberata cu succes!");
     }
 
     public void adaugaRetetaDB(Reteta a){
@@ -425,7 +425,7 @@ public class ServiciuDocument {
             throwables.printStackTrace();
         }
 
-        System.out.println("Reteta eliberata cu succes!");
+        //System.out.println("Reteta eliberata cu succes!");
     }
 
     public void adaugaAdeverintaMedDB(AdeverintaMedicala a){
@@ -466,7 +466,7 @@ public class ServiciuDocument {
             throwables.printStackTrace();
         }
 
-        System.out.println("Adeverinta medicala eliberata cu succes!");
+        //System.out.println("Adeverinta medicala eliberata cu succes!");
     }
 
     public static <O> void scrieCSV(O obiect, String path) throws IOException {
